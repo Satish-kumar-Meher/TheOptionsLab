@@ -1,0 +1,258 @@
+import type { ModuleLesson } from '../topicLessonTypes'
+
+/* Module 17.3 — Volume Profile.
+ * All numbers illustrative: NIFTY ≈ 24,000, lot 65 (check the current NSE contract specification), row size 10 points, volume in thousands of contracts.
+ * The NIFTY 50 index itself has no traded volume, so a volume profile is built on NIFTY futures (or a NIFTY ETF). */
+const m: ModuleLesson = {
+  moduleId: '17.3',
+  intro: `Volume Profile turns a chart sideways and counts how many contracts traded at each price, not how long the market stayed there. The prices with heavy volume show where many traders agreed to transact; the prices with thin volume show where the market moved through quickly. For an options trader it is a map of acceptance and rejection that helps place strikes, targets and stop-losses, but it describes the past and does not forecast direction.`,
+  introHi: `Volume Profile chart ko sideways kar deta hai aur gino ki har price par kitne contracts trade hue, time kitna laga yeh nahi. Jahan volume zyada hai wahan bahut traders ne deal ki, aur jahan volume kam hai wahan market tezi se nikal gaya. Options trader ke liye yeh acceptance aur rejection ka map hai jo strike, target aur stop-loss chunne mein madad karta hai, lekin yeh sirf past dikhata hai, direction ki guarantee nahi deta.`,
+  steps: {
+    concept: `A volume profile is a histogram drawn on the price axis. Each row is a price band, and the length of its bar is the total volume traded inside that band over the chosen period. Prices with long bars are accepted prices; prices with short bars are quickly rejected or skipped. Because the NIFTY index has no volume of its own, the profile is normally built on NIFTY futures.`,
+    conceptHi: `Volume profile price axis par bana ek histogram hai. Har row ek price band hai aur uski bar ki length us band mein us period mein hua total volume hai. Lambi bar wale prices accepted hain, chhoti bar wale prices jaldi reject ya skip ho gaye. NIFTY index ka apna volume nahi hota, isliye profile aam taur par NIFTY futures par banta hai.`,
+    mechanism: `The platform splits the chosen time window into candles, spreads each candle's volume across the rows that candle touched, and adds it up row by row. The row with the largest total is the Point of Control (POC). Rows holding about 70% of total volume form the Value Area, with an upper edge (VAH) and a lower edge (VAL). Rows far above the average are High Volume Nodes (HVN), and rows far below it are Low Volume Nodes (LVN). The window can be fixed by you (fixed range), follow whatever is on screen (visible range) or reset every day (session profile). Results change with the window, row size and data source, so two traders can see slightly different profiles.`,
+    example: {
+      title: 'One illustrative session profile on NIFTY futures',
+      text: `Volume per 10-point row, in thousands of contracts: 24,100 = 10; 24,090 = 14; 24,080 = 22; 24,070 = 35; 24,060 = 48; 24,050 = 62; 24,040 = 55; 24,030 = 40; 24,020 = 20; 24,010 = 12; 24,000 = 8. Total = 326. POC = 24,050 (62). Seventy percent of 326 = 228.2. Start at POC (62), take the larger two-row side: below (55 + 40 = 95) beats above (48 + 35 = 83), so 62 + 95 = 157. Next compare above (83) with below (20 + 12 = 32): take above, giving 157 + 83 = 240, which is at least 228.2. Value Area = 24,030 to 24,070 (VAL 24,030, VAH 24,070) holding 240 of 326 = 73.6% of volume. The average row is 326 ÷ 11 = 29.6, so the POC is about twice an average row.`,
+    },
+    chart: {
+      kind: 'bars',
+      title: 'Volume per row (thousand contracts) — illustrative session',
+      caption: 'The longest bar is POC (24,050). Gold rows, 24,030 to 24,070, are the 70% Value Area. Short bars at both ends are low-volume rows where the market passed through.',
+      unit: 'k',
+      items: [
+        { label: '24,100', value: 10, tone: 'neutral' },
+        { label: '24,090', value: 14, tone: 'neutral' },
+        { label: '24,080', value: 22, tone: 'neutral' },
+        { label: '24,070 VAH', value: 35, tone: 'gold' },
+        { label: '24,060', value: 48, tone: 'gold' },
+        { label: '24,050 POC', value: 62, tone: 'gold' },
+        { label: '24,040', value: 55, tone: 'gold' },
+        { label: '24,030 VAL', value: 40, tone: 'gold' },
+        { label: '24,020', value: 20, tone: 'neutral' },
+        { label: '24,010', value: 12, tone: 'neutral' },
+        { label: '24,000', value: 8, tone: 'neutral' },
+      ],
+    },
+    optionChain: `A volume profile is built on the underlying; an option chain shows contracts on strikes. They meet when a profile level (POC, VAH, VAL, an LVN) lies close to a strike with big OI or heavy volume. That strike may then be a level traders watch, but high OI is a potential level, not guaranteed support or resistance, and OI alone cannot show who initiated the trade. Use the profile to choose the zone and the chain to choose the strike and judge how much premium the zone is worth.`,
+    psychology: `Heavy volume at a price means many buyers and sellers were comfortable transacting there, so traders often treat it as fair value and return to it when price strays. Thin volume means few were willing to trade, so price travelled fast and fear or greed moved it. Beginners chase price through a thin zone, buy an option at inflated premium at the far end, and are shaken out when price drifts back to the heavy zone.`,
+    scenarios: {
+      bullish: `Price opens above yesterday's VAH, trades there and builds a new cluster of volume higher up (higher value). This supports a bullish view but does not guarantee it. A close back inside the old Value Area suggests the move was not accepted.`,
+      bearish: `Price opens below yesterday's VAL and builds volume lower, leaving the old POC above as overhead supply to test. That supports a bearish view, but a quick return into the old Value Area would weaken it.`,
+      sideways: `Price stays inside yesterday's Value Area, rotating around the POC. Volume piles up in the same rows, so the profile gets fatter, not wider. Long option premium tends to lose to time while this lasts.`,
+    },
+    practice: [
+      { q: `A session has 500 (thousand) contracts in total. How much volume should the Value Area hold, and how do you find it?`, a: `70% of 500 = 350 thousand contracts. Start at the POC, then repeatedly add the larger of the next two rows above and the next two rows below, until the running total is at least 350.` },
+      { q: `Rows are 24,060 = 48, 24,050 = 62, 24,040 = 55 (thousand). Which is the POC, and what does the 24,050 row tell you?`, a: `POC = 24,050 because 62 is the highest. It is the single price where most contracts traded, so it is a candidate fair-value level. It is not a forecast; it only describes where trading happened.` },
+      { q: `Average row volume is 29.6k. A row shows 62k and another shows 8k. Classify them.`, a: `62 ÷ 29.6 ≈ 2.1 times the average, so a High Volume Node. 8 ÷ 29.6 ≈ 0.27 of the average, so a Low Volume Node. Exact cut-offs are a judgement; many traders use roughly more than 1.5 times and less than 0.5 times the average.` },
+      { q: `Why is NIFTY futures, not the NIFTY index, used for a volume profile?`, a: `The index is a calculated number and has no traded volume of its own. Futures (and ETFs) have real volume, so a profile built on them counts contracts that actually traded.` },
+    ],
+    assignment: `Open NIFTY futures on a 5-minute chart with a free charting tool that has a volume profile. Mark the session POC, VAH and VAL for the last 5 trading days. Each next morning write down whether NIFTY opened inside, above or below the previous Value Area and what the first hour did. Record only; do not trade on it yet.`,
+  },
+  topics: [
+    {
+      t: 1,
+      def: `Volume Profile is a histogram that shows how much volume traded at each price level over a chosen period. Unlike a normal volume bar under a candle, which shows volume per unit of time, it shows volume per unit of price. The long bars mark prices where a lot of trading happened.`,
+      hi: `Volume Profile ek histogram hai jo dikhata hai ki chune hue period mein har price level par kitna volume trade hua. Candle ke neeche wali normal volume bar time ke hisaab se volume dikhati hai, jabki profile price ke hisaab se dikhata hai. Jahan bar lambi hai, wahan bahut trading hui.`,
+      how: `The charting platform takes tick or minute data from NIFTY futures, assigns each candle's volume to the price rows that candle covered, and sums them. NSE publishes traded volume for futures and options, which is what makes this possible; the NIFTY index has none. Row size matters: 10-point rows give detail, 50-point rows blur it. The result is a picture of acceptance (long bars) and rejection (short bars), drawn on the price axis.`,
+      eg: {
+        title: 'Reading a one-day profile',
+        text: `On an illustrative day, NIFTY futures traded 326 thousand contracts across 24,000 to 24,100. Of these, 62 thousand traded in the 24,050 row and only 8 thousand in the 24,000 row. So 24,050 was where the market transacted most, about 19% of the day (62 ÷ 326 = 0.190), while 24,000 was visited briefly, about 2.5% (8 ÷ 326 = 0.0245).`,
+      },
+      tip: `Volume Profile describes where trading happened; it does not say whether buyers or sellers were the aggressor. Do not read a long bar as bullish or bearish by itself.`,
+      visual: {
+        kind: 'compare',
+        title: 'Volume bar vs Volume Profile',
+        left: { head: 'Normal volume bars', tone: 'neutral', points: ['X-axis is time', 'One bar per candle', 'Shows when trading was busy'] },
+        right: { head: 'Volume Profile', tone: 'gold', points: ['Y-axis is price', 'One bar per price row', 'Shows where trading was busy'] },
+      },
+    },
+    {
+      t: 2,
+      def: `A Fixed Range Volume Profile is one that you draw between two points you choose, for example from a swing low to today. The profile covers only that range, so it answers a specific question such as "where did traders transact since the Budget day low?".`,
+      hi: `Fixed Range Volume Profile woh hota hai jisme aap khud start aur end point chunte ho, jaise swing low se aaj tak. Profile sirf us range ka banta hai, isliye aap kisi specific sawaal ka jawab dhoondh sakte ho, jaise "Budget day ke low ke baad kahan sabse zyada trading hui?".`,
+      how: `You anchor the start at a meaningful event: a swing low, a gap, an earnings or Budget day, or the start of an expiry series. The end is the latest candle, so the profile keeps growing as new data comes. Because you pick the anchor, the same market can show different POC and Value Area depending on the anchor, so choose it for a reason and write the reason down. Anchoring at the start of a monthly series is common, since open interest and positions for that series start there.`,
+      eg: {
+        title: 'Anchoring at the start of the series',
+        text: `Suppose you anchor on the first day of the monthly expiry series and the 14 sessions give POC 24,050, VAH 24,120 and VAL 23,980. The Value Area is 24,120 − 23,980 = 140 points wide. One week (5 days) of 1σ expected movement at VIX 14 is 24,000 × 0.14 × sqrt(5/365) ≈ 393 points, so the market has spent most of its volume in a band well inside a typical week's range. This is illustrative.`,
+      },
+      tip: `Anchor on a reason (event, swing, series start), not on whatever makes the picture look good. A hand-picked anchor that fits your view only confirms the view.`,
+      visual: {
+        kind: 'timeline',
+        title: 'Choosing an anchor',
+        events: [
+          { when: 'Swing low', what: 'Profile since the last major turning point', tone: 'ice' },
+          { when: 'Series start', what: 'Profile for the current monthly expiry cycle', tone: 'gold' },
+          { when: 'Event day', what: 'Budget, RBI policy or results day to now', tone: 'neutral' },
+        ],
+      },
+      calc: { id: 'expected-move', preset: { spot: 24000, vix: 14, days: 5 }, why: 'Compare the width of the Value Area with a typical 1σ move over the same period.' },
+    },
+    {
+      t: 3,
+      def: `A Visible Range Volume Profile is built automatically from whatever candles are on your screen. When you zoom or scroll, the profile is recalculated for the new visible window.`,
+      hi: `Visible Range Volume Profile jo candles aapki screen par dikh rahi hain unse apne aap ban jaata hai. Jab aap zoom ya scroll karte ho, profile naye window ke hisaab se dobara calculate hota hai.`,
+      how: `It is convenient because you do not draw anything, and it is useful for a quick look at "what does this chart say right now". The risk is that the profile changes with your zoom level. Zoom to two days and the POC may sit near 24,050; zoom to a month and it may sit at 23,900 because older volume now counts. The tool is not wrong either time; the question you asked changed. Use it for exploration and use a fixed range for levels you plan to trade around.`,
+      eg: {
+        title: 'Same market, two zoom levels',
+        text: `Illustrative: with 2 days visible, the POC is 24,050 and the Value Area is 24,000 to 24,100. After zooming out to 30 days, the POC becomes 23,900 and the Value Area is 23,800 to 24,100. The 24,050 level is still part of the larger profile but is no longer the centre. A trader who quotes "the POC" without saying the window is giving incomplete information.`,
+      },
+      tip: `Always note the window next to a level ("POC 23,900, 30 days"). A level without its window cannot be reproduced.`,
+    },
+    {
+      t: 4,
+      def: `A Session Volume Profile builds a fresh profile for each trading session. It resets at the open, so each day gets its own POC, Value Area and nodes. It is the easiest way to compare today with yesterday.`,
+      hi: `Session Volume Profile har trading session ke liye naya profile banata hai. Yeh market open par reset ho jaata hai, isliye har din ka apna POC, Value Area aur nodes hote hain. Aaj ko kal se compare karne ka sabse aasaan tareeka yahi hai.`,
+      how: `On NIFTY futures the regular session runs from 9:15 AM; NSE has changed derivatives closing time to 3:40 PM from 3 August 2026, so check the current session hours in your platform. Yesterday's final POC, VAH and VAL are drawn on today's chart as reference lines. Where today opens relative to yesterday's Value Area is the first read: inside value suggests balance; outside value suggests a search for new value. A developing profile updates through the day and can look different by evening. Some platforms also draw a naked POC, a prior POC that price has not revisited since.`,
+      eg: {
+        title: 'Opening outside yesterday\'s value',
+        text: `Yesterday's profile (illustrative): VAL 24,030, POC 24,050, VAH 24,070. Today NIFTY futures open at 24,090, which is 20 points above VAH. If price holds above 24,070 and builds volume at 24,090 to 24,110, the market may be accepting higher value. If it returns below 24,070 and trades inside the old range, the attempt to leave value failed. The call is made by what happens next, not by the open.`,
+      },
+      tip: `The open tells you where to look, not what will happen. Wait for the first 30 to 60 minutes of volume before treating an open outside value as acceptance.`,
+      visual: {
+        kind: 'flow',
+        title: 'Using yesterday\'s session profile today',
+        steps: [
+          { label: 'Mark POC, VAH, VAL', note: 'from yesterday', tone: 'gold' },
+          { label: 'Note today\'s open', note: 'inside / above / below', tone: 'ice' },
+          { label: 'Watch first hour volume', note: 'accepted or rejected', tone: 'neutral' },
+          { label: 'Plan around the node', note: 'strike, target, stop', tone: 'gold' },
+        ],
+      },
+    },
+    {
+      t: 5,
+      def: `The Point of Control (POC) is the price row with the highest traded volume in the profile. It is the single price where the most business was done in the chosen period.`,
+      hi: `Point of Control (POC) woh price row hai jahan profile mein sabse zyada volume trade hua. Yeh woh ek price hai jahan chune hue period mein sabse zyada business hua.`,
+      how: `The POC is found by comparing the volume of every row and picking the maximum. It is related to, but not the same as, VWAP: VWAP is a volume-weighted average of all prices, while the POC is the single most-traded price. When a market trends, the POC can migrate up or down from day to day. A POC that does not move for several days signals balance. Traders watch it as a magnet and as a reference for risk, but price can and does move straight through it.`,
+      eg: {
+        title: 'POC against VWAP',
+        text: `From the example session, take the five biggest rows as fills (thousands): 24,030 × 40, 24,040 × 55, 24,050 × 62, 24,060 × 48, 24,070 × 35. Total volume = 240. Sum of price × volume = 5,771,830, so VWAP = 5,771,830 ÷ 240 ≈ 24,049.29. The POC is 24,050. They are close because the profile is roughly symmetrical; on a skewed day they separate.`,
+      },
+      tip: `Do not treat the POC as a target or a guaranteed turning point. It is the most-traded price, and the market can accept a new, higher or lower POC tomorrow.`,
+      visual: {
+        kind: 'bars',
+        title: 'The five heaviest rows',
+        unit: 'k',
+        items: [
+          { label: '24,070', value: 35, tone: 'neutral' },
+          { label: '24,060', value: 48, tone: 'neutral' },
+          { label: '24,050 POC', value: 62, tone: 'gold' },
+          { label: '24,040', value: 55, tone: 'neutral' },
+          { label: '24,030', value: 40, tone: 'neutral' },
+        ],
+      },
+      calc: { id: 'vwap-twap', preset: { fills: '24030:40;24040:55;24050:62;24060:48;24070:35' }, why: 'Compute the volume-weighted average of the five heaviest rows and compare it with the POC.' },
+    },
+    {
+      t: 6,
+      def: `A High Volume Node (HVN) is a price area where volume is much greater than nearby rows. It shows prices the market has accepted, so price often slows down, chops sideways or finds a balance there.`,
+      hi: `High Volume Node (HVN) woh price area hai jahan aas-paas ki rows se bahut zyada volume hua. Yeh dikhata hai ki market ne in prices ko accept kiya, isliye yahan price aksar slow hota hai, sideways chalta hai ya balance banata hai.`,
+      how: `An HVN forms when buyers and sellers keep transacting at a price, often because both think it is fair. When price returns to an HVN, there are many participants with positions or memories there, so trading tends to be heavier and choppier. HVNs act like speed bumps for a trend and like magnets in a range. They can also be broken; a strong catalyst such as RBI policy or Budget day can carry price through. The same node can act as support from above and resistance from below.`,
+      eg: {
+        title: 'Price slows at an HVN',
+        text: `In the example session the average row is 326 ÷ 11 = 29.6k and the 24,050 row has 62k, about 2.1 times average, so it is an HVN. Suppose tomorrow price rallies from 24,000 toward 24,050 after a quick burst. The rise may slow there as earlier buyers and sellers trade again. If you hold a bought 24,100 CE, expect a slower move around 24,050 and consider that you may need patience; it is not a signal to sell or buy by itself.`,
+      },
+      tip: `An HVN is a zone, not a line. Give it a few rows of width (for example 24,040 to 24,060) rather than treating a single price as a wall.`,
+      visual: { kind: 'candles', title: 'Price stalls at a high-volume area', pattern: 'range', level: { price: 24050, label: 'HVN 24,050' } },
+    },
+    {
+      t: 7,
+      def: `A Low Volume Node (LVN) is a price area where volume is much lower than nearby rows. It shows prices the market did not accept, so price often moves through an LVN quickly.`,
+      hi: `Low Volume Node (LVN) woh price area hai jahan aas-paas ki rows se bahut kam volume hua. Yeh batata hai ki market ne in prices ko accept nahi kiya, isliye price aksar LVN se jaldi nikal jaata hai.`,
+      how: `LVNs form after fast moves driven by news or one-sided orders, when few participants had time to trade. Later, when price comes back, there are few positions there to defend, so price tends to travel quickly through the node to the next HVN. Some traders also see an LVN as a place where price is rejected on a first touch. Both views can be true on different days, so the reaction must be confirmed on the chart. Stops placed inside an LVN are exposed because price does not stay long enough to give a second chance.`,
+      eg: {
+        title: 'Crossing a thin zone',
+        text: `Illustrative profile with HVNs at 24,030 (60k) and 24,110 (57k) and an LVN around 24,070 (6k). If price breaks out of the lower HVN, the distance to the next HVN is 24,110 − 24,030 = 80 points, and little volume sits in between. A 65-lot position moves ₹5,200 per 80-point NIFTY move at delta 1 (80 × 65), so risk and reward can build quickly in the thin zone, in either direction.`,
+      },
+      tip: `Price can move fast through an LVN, which helps a trade that is right and hurts one that is wrong. Check your stop-loss distance before entering inside or near one.`,
+      visual: {
+        kind: 'bars',
+        title: 'Two HVNs with an LVN between them',
+        unit: 'k',
+        items: [
+          { label: '24,120', value: 46, tone: 'neutral' },
+          { label: '24,110', value: 57, tone: 'gold' },
+          { label: '24,100', value: 44, tone: 'neutral' },
+          { label: '24,080', value: 7, tone: 'ice' },
+          { label: '24,070', value: 6, tone: 'ice' },
+          { label: '24,060', value: 8, tone: 'ice' },
+          { label: '24,040', value: 48, tone: 'neutral' },
+          { label: '24,030', value: 60, tone: 'gold' },
+          { label: '24,020', value: 52, tone: 'neutral' },
+        ],
+      },
+    },
+    {
+      t: 8,
+      def: `The Value Area is the price range that holds about 70% of the volume in the profile. Its top is the Value Area High (VAH) and its bottom is the Value Area Low (VAL). It marks where the market considered price fair.`,
+      hi: `Value Area woh price range hai jisme profile ka lagbhag 70% volume hua. Iska upar ka edge Value Area High (VAH) aur neeche ka Value Area Low (VAL) hai. Yeh dikhata hai ki market ne kis range ko fair maana.`,
+      how: `The 70% figure is a convention borrowed from the one-standard-deviation idea of a normal curve, which covers about 68% of outcomes. The platform starts at the POC and adds the larger of the next two rows above or below until it reaches 70%. Traders compare today's open with yesterday's VAH and VAL. Opening inside value suggests balance; opening outside suggests a search for new value. A widely used rule of thumb says that if price re-enters the old Value Area and stays for two consecutive 30-minute periods, it may travel to the other side; it is a tendency, not a promise.`,
+      eg: {
+        title: 'Value Area against a one-sigma day',
+        text: `From the example, VAL 24,030 and VAH 24,070 enclose 240 of 326 thousand contracts (73.6%). That is a 40-point band between VAL and VAH. A one-day 1σ move at VIX 14 is about 24,000 × 0.14 × sqrt(1/365) ≈ 176 points. So the market's fair-value band is far narrower than a typical day's possible range; a break out of it is not unusual and does not by itself mean a trend.`,
+      },
+      tip: `Value Area edges are reference levels, not trade signals. Wait for acceptance (price staying outside) or rejection (price falling back) before acting.`,
+      visual: {
+        kind: 'gauge',
+        title: 'Where NIFTY futures sit against value (illustrative)',
+        min: 24000,
+        max: 24100,
+        value: 24090,
+        zones: [
+          { from: 24000, to: 24030, label: 'Below VAL', tone: 'bear' },
+          { from: 24030, to: 24070, label: 'Inside value', tone: 'gold' },
+          { from: 24070, to: 24100, label: 'Above VAH', tone: 'bull' },
+        ],
+      },
+      calc: { id: 'expected-move', preset: { spot: 24000, vix: 14, days: 1 }, why: 'Compare the narrow Value Area with a one-day 1σ range.' },
+    },
+    {
+      t: 9,
+      def: `A volume gap is a stretch of prices with very little traded volume, usually between two heavy areas. It is different from a price gap on the chart: price may have traded through a volume gap smoothly, with no opening gap at all.`,
+      hi: `Volume gap woh price stretch hai jahan bahut kam volume hua, aam taur par do heavy areas ke beech mein. Yeh chart ke price gap se alag hai: price volume gap se smoothly guzar sakta hai, bina kisi opening gap ke.`,
+      how: `A volume gap shows up as a valley between two peaks in the profile, producing a double-distribution shape. It usually appears after a news-driven jump from one balance area to another. When price returns to the gap, there are few earlier participants to slow it down, so it tends to cross towards the next node. A move that lingers inside the gap suggests acceptance is starting to form there, and the gap may fill with volume over days. Which way it resolves depends on later flows; the gap shows where the speed may be, not which way.`,
+      eg: {
+        title: 'A valley between two peaks',
+        text: `Illustrative profile (thousand contracts): 24,030 = 60, 24,060 = 8, 24,070 = 6, 24,080 = 7, 24,110 = 57. The three thin rows hold 8 + 6 + 7 = 21 of the total 432 contracts, 21 ÷ 432 = 4.9%, across a 30-point stretch. If price drops from 24,110 toward 24,030, expect little resistance through the valley and the first real test around the lower HVN.`,
+      },
+      tip: `Do not confuse a volume gap with a price gap. Zoom to the profile, not just the candles, before calling a zone "thin".`,
+      visual: {
+        kind: 'layers',
+        title: 'Double-distribution shape (top to bottom)',
+        layers: [
+          { label: 'Upper HVN 24,100 to 24,120', note: 'Accepted higher value', tone: 'gold' },
+          { label: 'Volume gap 24,060 to 24,080', note: 'Only 4.9% of volume', tone: 'ice' },
+          { label: 'Lower HVN 24,020 to 24,040', note: 'Earlier accepted value', tone: 'gold' },
+        ],
+      },
+    },
+    {
+      t: 10,
+      def: `Volume Profile levels such as the POC, Value Area edges, HVNs and LVNs can act as support or resistance. Price often reacts around them because many participants have a history at those prices. A reaction is likely to be stronger when a profile level lines up with other evidence.`,
+      hi: `Volume Profile ke levels jaise POC, Value Area edges, HVN aur LVN support ya resistance ban sakte hain. In prices par aksar reaction aata hai kyunki bahut se participants ka history wahan hota hai. Jab profile level kisi aur evidence se match karta hai toh reaction zyada strong ho sakta hai.`,
+      how: `A usable plan combines three things: a profile level, price behaviour at the level, and the option chain. For example, an HVN near a strike with large Put OI may be a zone traders watch for support, but OI alone cannot show who initiated the trade and high OI is not guaranteed support. Enter only after price shows acceptance or rejection there, and put the stop-loss beyond the zone, where your idea is wrong. Then size the position so that a loss at that stop is a fixed small percentage of capital.`,
+      eg: {
+        title: 'Support zone plus Put OI',
+        text: `Illustrative: NIFTY futures dip to the 24,050 HVN, which also matches the 24,050 strike. Chain OI in lakh: 24,050 CE 52, PE 40; 24,000 PE 60. You buy a 24,100 CE at ₹120 after price holds the zone, with a stop at ₹90. Loss per lot at the stop = 30 × 65 = ₹1,950. With capital of ₹5,00,000 and 1% risk (₹5,000), lots = 5,000 ÷ 1,950 = 2.56, so 2 lots. If the zone fails the stop is hit; that is the cost of being wrong.`,
+      },
+      tip: `A level is stronger when profile, price action and the option chain agree, but none of them is a guarantee. Decide your exit before you enter.`,
+      visual: {
+        kind: 'oi',
+        title: 'Option chain OI (lakh contracts, illustrative)',
+        caption: 'Put OI is larger at 24,000 and Call OI is larger at 24,100. These are potential levels only.',
+        spot: 24050,
+        rows: [
+          { strike: 23950, ce: 20, pe: 55 },
+          { strike: 24000, ce: 35, pe: 60 },
+          { strike: 24050, ce: 52, pe: 40 },
+          { strike: 24100, ce: 60, pe: 25 },
+          { strike: 24150, ce: 45, pe: 15 },
+        ],
+      },
+      calc: { id: 'position-size', preset: { capital: 500000, riskPct: 1, entry: 120, stop: 90, lotSize: 65 }, why: 'Turn the stop distance into a lot count that risks only 1% of capital.' },
+    },
+  ],
+  tools: [{ id: 'expected-move', preset: { spot: 24000, vix: 14, days: 1 }, why: 'One-day 1σ range to compare with profile widths.' }],
+}
+export default m

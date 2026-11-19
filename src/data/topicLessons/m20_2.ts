@@ -1,0 +1,118 @@
+import type { ModuleLesson } from '../topicLessonTypes'
+
+/* Module 20.2 — Basic Option Selling Strategies.
+ * All numbers illustrative: NIFTY ≈ 24,000, lot 65 (check the current NSE contract specification), India VIX ≈ 14, 7 days to expiry.
+ * Premiums are Black-Scholes values (IV 14%, r 6.5%, q 1.3%) rounded to whole rupees; real premiums differ.
+ * Stock examples (covered call, cash-secured put) use a made-up stock and lot of 500 only to show the arithmetic. */
+const m: ModuleLesson = {
+  moduleId: '20.2',
+  intro: `Option selling means collecting a premium today in return for taking on an obligation. The seller's profit is capped at the premium, while the loss can be many times larger, so this module is as much about risk as about income. It covers naked and covered writing, cash-secured puts, ATM and OTM selling, and the difference between intraday and positional premium selling.`,
+  introHi: `Option selling mein aap aaj premium collect karte ho aur badle mein ek obligation le lete ho. Seller ka profit premium tak limited hota hai, jabki loss kai guna bada ho sakta hai, isliye yeh module income se zyada risk ke baare mein hai. Isme naked aur covered writing, cash-secured put, ATM aur OTM selling, aur intraday vs positional premium selling cover hota hai.`,
+  steps: {
+    concept: `A seller (writer) receives the premium and must honour the contract if the buyer exercises. A call seller must be ready to deliver gains if the market rises; a put seller must be ready to pay if it falls. The best case is fixed: keep the whole premium. The worst case is much larger, which is why most selling strategies need margin, discipline and often a hedge.`,
+    conceptHi: `Seller (writer) premium leta hai aur agar buyer exercise kare toh contract nibhana padta hai. Call seller ko market upar jaane par nuksan uthana padta hai, put seller ko market girne par. Best case fixed hai: poora premium apna. Worst case bahut bada ho sakta hai, isliye selling mein margin, discipline aur aksar hedge zaroori hai.`,
+    mechanism: `When you sell an option on NSE, the premium is credited, but the clearing corporation (NSCCL) blocks margin from your broker account: SPAN margin for the worst-case move plus exposure margin. As the market moves against you the margin can rise and mark-to-market losses are debited daily. Time decay (theta) and falling implied volatility help the seller; a sharp move or a volatility spike hurts. Index options are cash-settled, so there is no delivery; stock options are physically settled, so an in-the-money stock short can end in a delivery obligation.`,
+    example: {
+      title: 'Short 24,300 CE at ₹80: the shape of selling risk (illustrative)',
+      text: `NIFTY 24,000, 7 days left. Sell 1 lot (65) of the 24,300 CE at ₹80 and collect 80 × 65 = ₹5,200. Breakeven = 24,300 + 80 = 24,380. If NIFTY expires at 24,300 or below, you keep ₹5,200. At 24,600 the call is worth 300, loss = (300 − 80) × 65 = ₹14,300. At 25,000 the loss is (700 − 80) × 65 = ₹40,300. Reward is capped at ₹5,200; the loss keeps growing.`,
+    },
+    chart: { kind: 'payoff', title: 'Short 24,300 CE at ₹80: capped profit, open loss', caption: 'The profit plateau is the premium; the slope above 24,380 is the unlimited-loss side.', spot: 24000, legs: [{ type: 'CE', side: -1, strike: 24300, premium: 80 }] },
+    optionChain: `On the chain a seller looks at premium, OI and IV. A strike with large OI may be a level where many participants are positioned, but OI alone cannot show who initiated the trade and is not a guaranteed support or resistance. Compare the premium collected with the expected move: at VIX 14 the 7-day 1-sigma move is about 24,000 × 0.14 × √(7/365) ≈ 465 points. A strike inside that range pays more but is hit more often; a strike outside it pays little for a tail risk that still exists.`,
+    psychology: `Selling feels comfortable because most trades win small amounts, and that comfort is the trap: many small wins can be wiped by one gap or one panic day. Sellers are tempted to skip stop-losses, add lots to recover, or sell too close to spot for a bigger premium. Disciplined sellers decide the exit rule and the maximum loss in rupees before entering, and they size so that one bad trade is survivable. The belief that sellers always win is false.`,
+    scenarios: {
+      bullish: `Spot rises: short calls lose (the further above the strike, the worse), short puts gain as the put premium melts. A strong bullish day hurts call writers most.`,
+      bearish: `Spot falls: short puts lose and short calls gain. A sharp fall also tends to lift India VIX, so a put seller faces loss from delta and from rising volatility together.`,
+      sideways: `Spot stays in a range: this is the seller's best case. Theta erodes the premium each day and the seller keeps most or all of it, provided risk was sized sensibly.`,
+    },
+    practice: [
+      { q: `You sell 1 lot of the 24,100 CE at ₹150 (lot 65). NIFTY expires at 24,500. What is the result?`, a: `Call value at expiry = 24,500 − 24,100 = 400. Loss per unit = 400 − 150 = 250. Loss = 250 × 65 = ₹16,250. Premium received was 150 × 65 = ₹9,750, so the loss is 1.67 times the premium.` },
+      { q: `You sell 1 lot of the 23,800 PE at ₹94. Find the premium received and the breakeven.`, a: `Premium = 94 × 65 = ₹6,110. Breakeven = 23,800 − 94 = 23,706. Below 23,706 at expiry the trade is in loss.` },
+      { q: `You own 500 shares of a stock at ₹1,000 and sell a 1,040 call at ₹12 (lot 500, illustrative). Find breakeven and maximum profit.`, a: `Breakeven = 1,000 − 12 = ₹988. Maximum profit per share = (1,040 − 1,000) + 12 = 52, so 52 × 500 = ₹26,000, reached at any price at or above 1,040. Above 1,040 you give up further gains.` },
+      { q: `A cash-secured put on a 960 strike earns ₹10 per share on a lot of 500 with ₹4,80,000 set aside. What is the return on that cash if the put expires worthless?`, a: `Premium = 10 × 500 = ₹5,000. Return = 5,000 / 4,80,000 = 1.04% for the holding period. If assigned, the effective buy price is 960 − 10 = ₹950.` },
+    ],
+    assignment: `Take today's NIFTY chain. Pick one OTM call and one OTM put about 1.5% from spot on the current weekly expiry. For each, write the premium per lot, the breakeven, the loss if NIFTY moves 3% beyond the strike, and the ratio of that loss to the premium. Decide in writing the maximum rupee loss at which you would exit, before looking at the next module.`,
+  },
+  topics: [
+    {
+      t: 1,
+      def: `Naked call selling means you sell a call option without owning the underlying or holding any hedge. You receive the premium and profit if the price stays at or below the strike. If the price rises sharply, your loss has no upper limit.`,
+      hi: `Naked call selling matlab aap bina underlying ya hedge ke call option bech dete ho. Aapko premium milta hai aur agar price strike ke neeche ya barabar rehta hai toh profit hota hai. Agar price tezi se upar gaya toh loss ki koi upper limit nahi hoti.`,
+      how: `The broker blocks SPAN plus exposure margin for the short call, and this margin is the real cost of capital in the trade. The seller earns theta each day but carries negative gamma: as the index rallies, the position loses faster. Losses are marked to market daily and you may get a margin call. Practical sellers set a stop on the option premium or on NIFTY, or convert the trade into a spread by buying a far call.`,
+      eg: { title: 'Short 24,300 CE at ₹80 (illustrative)', text: `Premium = 80 × 65 = ₹5,200; breakeven 24,380. NIFTY at 24,200: keep ₹5,200. NIFTY at 24,600: loss = (300 − 80) × 65 = ₹14,300. NIFTY at 25,000: loss = (700 − 80) × 65 = ₹40,300. Three times the premium is lost on a 4.2% rise from 24,000.` },
+      tip: `The risk of a naked short call is not the typical day but the one rally day. Decide the exit point in rupees before you sell.`,
+      visual: { kind: 'payoff', title: 'Short call: premium cap, open-ended loss', spot: 24000, legs: [{ type: 'CE', side: -1, strike: 24300, premium: 80 }] },
+      calc: { id: 'option-pnl', preset: { optType: 'CE', side: 'sell', strike: 24300, premium: 80, expiryPrice: 24600, lotSize: 65, lots: 1 }, why: 'Shows the ₹14,300 loss at 24,600 against ₹5,200 maximum profit.' },
+    },
+    {
+      t: 2,
+      def: `Naked put selling means you sell a put without any hedge. You collect the premium and gain if the price stays above the strike. You lose if the price falls below strike minus premium, and the loss can be very large, though limited by the fact that a price cannot go below zero.`,
+      hi: `Naked put selling matlab aap bina hedge ke put bech dete ho. Premium aapka hota hai agar price strike ke upar rahe. Agar price strike minus premium se neeche gaya toh loss hota hai, aur yeh loss bahut bada ho sakta hai, bas price zero se neeche nahi ja sakta.`,
+      how: `A put seller is effectively agreeing to buy at the strike. Many traders sell puts because they think the market will not fall much, and they like that Indian indices rise over long periods. The danger is that falls are fast: a panic day lifts India VIX, widens spreads and raises margin together with the loss. The theoretical maximum loss is strike minus premium times lot size, reached only if the index went to zero, but practical losses can still be many multiples of the premium.`,
+      eg: { title: 'Short 23,700 PE at ₹66 (illustrative)', text: `Premium = 66 × 65 = ₹4,290; breakeven = 23,700 − 66 = 23,634. At 23,000 the put is worth 700, loss = (700 − 66) × 65 = ₹41,210. Theoretical maximum loss = 23,634 × 65 = ₹15,36,210, which shows why undefined risk needs sizing and a stop, not hope.` },
+      tip: `A put seller earns small premiums for carrying crash risk. The VIX rising while spot falls is the double hit to watch.`,
+      visual: { kind: 'payoff', title: 'Short put: premium cap, large downside', spot: 24000, legs: [{ type: 'PE', side: -1, strike: 23700, premium: 66 }] },
+      calc: { id: 'option-pnl', preset: { optType: 'PE', side: 'sell', strike: 23700, premium: 66, expiryPrice: 23000, lotSize: 65, lots: 1 }, why: 'Shows the ₹41,210 loss at 23,000 against ₹4,290 premium.' },
+    },
+    {
+      t: 3,
+      def: `A covered call means you already own the underlying (shares, or an equivalent position) and sell a call against it. The premium gives you extra income and a small cushion, but you give up gains above the call strike. It is considered a mild strategy, not a risk-free one, because the stock can still fall.`,
+      hi: `Covered call matlab aapke paas pehle se shares (ya equivalent position) hain aur aap un par call bech dete ho. Premium se extra income milta hai aur thoda cushion bhi, lekin strike ke upar ka profit aap chhod dete ho. Yeh mild strategy hai, risk-free nahi, kyunki stock phir bhi gir sakta hai.`,
+      how: `Stock options on NSE are physically settled, so if the call finishes in the money the shares can be delivered against it: the holding is what makes the call covered. The seller holds shares in the demat account (held with NSDL or CDSL) and brokers usually accept them as margin collateral subject to haircuts. Index options have no deliverable, so an index covered call is built with Nifty futures or an ETF-like basket. The maximum profit is the strike minus your purchase price plus the premium; the downside is the stock fall less the premium.`,
+      eg: { title: 'Illustrative stock: bought at ₹1,000, sell 1,040 CE at ₹12, lot 500', text: `Premium = 12 × 500 = ₹6,000. Breakeven = 1,000 − 12 = ₹988. Maximum profit = (40 + 12) × 500 = ₹26,000 at 1,040 or above. If the stock falls to 940: stock loss = 60 × 500 = ₹30,000, offset by ₹6,000, net loss ₹24,000. If it rises to 1,100 you still earn only ₹26,000, missing 60 × 500 = ₹30,000 of extra upside.` },
+      tip: `The call cushions only the amount of the premium. If you would be unhappy to sell the shares at the strike, choose a higher strike.`,
+      visual: { kind: 'payoff', title: 'Covered call (long futures + short 24,300 CE at ₹80)', caption: 'Index equivalent of holding the underlying and writing a call.', spot: 24000, legs: [{ type: 'FUT', side: 1, strike: 24000 }, { type: 'CE', side: -1, strike: 24300, premium: 80 }] },
+      calc: { id: 'option-pnl', preset: { optType: 'CE', side: 'sell', strike: 1040, premium: 12, expiryPrice: 1100, lotSize: 500, lots: 1 }, why: 'Shows the call leg alone; add the share gain of 100 × 500 separately to see the covered result.' },
+    },
+    {
+      t: 4,
+      def: `A cash-secured put means you sell a put and keep enough cash set aside to buy the shares at the strike if you are assigned. It is used by people who would like to own a stock at a lower price and are paid a premium while they wait. The risk is that the stock falls well below the strike.`,
+      hi: `Cash-secured put matlab aap put bechte ho aur strike par shares kharidne ke liye poora cash alag rakhte ho. Yeh wo log use karte hain jo stock ko neeche ke price par kharidna chahte hain aur intezaar ke badle premium kamate hain. Risk yeh hai ki stock strike se bahut neeche chala jaye.`,
+      how: `In India this works for stock options, which are physically settled: an in-the-money short put at expiry results in a delivery obligation to buy the shares. The broker does not literally lock the whole strike value; it blocks SPAN plus exposure margin, so the cash-secured discipline is one you impose yourself by keeping the money available. Your effective purchase price if assigned is strike minus premium. The strategy is not suitable for a stock you would not want to hold through a deep fall.`,
+      eg: { title: 'Illustrative: sell 960 PE at ₹10, lot 500', text: `Premium = 10 × 500 = ₹5,000. Cash earmarked = 960 × 500 = ₹4,80,000. Return if the put expires worthless = 5,000 / 4,80,000 = 1.04%. If the stock closes at 900 you are assigned at 960 (effective cost ₹950) and sit on a paper loss of (950 − 900) × 500 = ₹25,000. Whether that is acceptable depends on whether you wanted the stock at 950.` },
+      tip: `Only sell a cash-secured put on a stock you are genuinely happy to own at the strike, after a fall of 20% beyond it.`,
+      visual: { kind: 'compare', title: 'Naked put vs cash-secured put', left: { head: 'Naked put', tone: 'bear', points: ['Only margin is blocked', 'Leverage is easy to overuse', 'Intent: premium income only'] }, right: { head: 'Cash-secured put', tone: 'gold', points: ['Full cash kept available', 'Assignment is planned, not a surprise', 'Intent: buy the stock cheaper'] } },
+    },
+    {
+      t: 5,
+      def: `ATM option selling means selling the option whose strike is closest to the current price. It collects the largest premium and the most time decay, but the position is also the most sensitive to price moves because its delta is about 0.5. Small moves against you quickly turn into losses.`,
+      hi: `ATM option selling matlab current price ke sabse paas ka strike bechna. Isme premium sabse zyada milta hai aur time decay bhi sabse tez, lekin delta lagbhag 0.5 hone se price move ka asar bhi sabse zyada hota hai. Chhoti si move aapke khilaf gayi toh loss jaldi badhta hai.`,
+      how: `ATM options have the most time value, so they decay fastest in rupees, and they have the highest gamma near expiry, so deltas change quickly. A short ATM put with delta about −0.48 loses roughly 0.48 rupees per index point of fall per unit. Because the premium is a large fraction of the expected move, the strike is hit about half the time; profits depend on spot not going far. Many sellers pair it with a far hedge or sell the ATM on both sides only with strict exits.`,
+      eg: { title: 'Short 24,000 PE at ₹174 (illustrative)', text: `Premium = 174 × 65 = ₹11,310. Breakeven = 24,000 − 174 = 23,826. Delta about −0.48, so a 100-point fall costs about 0.48 × 100 × 65 = ₹3,120 before gamma adds to it. Daily theta is about ₹11.6 per unit, roughly ₹752 per lot per day if nothing else changes. One bad intraday fall can cost several days of that decay.` },
+      tip: `ATM selling pays the most and demands the tightest risk control. Premium collected is a compensation, not a cushion.`,
+      visual: { kind: 'curve', title: 'Theta: decay accelerates near expiry for ATM options', curve: 'theta' },
+      calc: { id: 'greeks', preset: { optType: 'PE', spot: 24000, strike: 24000, days: 7, iv: 14, rate: 6.5 }, why: 'Shows delta about −0.48, theta and gamma of the ATM put being sold.' },
+    },
+    {
+      t: 6,
+      def: `OTM option selling means selling an option whose strike is away from the current price. The premium is smaller but the chance of finishing in the money is lower. It wins often, yet each loss can be several times the premium.`,
+      hi: `OTM option selling matlab current price se door ke strike bechna. Premium kam milta hai lekin us strike tak price pahunchne ka chance bhi kam hota hai. Isme jeet aksar hoti hai, par har loss premium ka kai guna ho sakta hai.`,
+      how: `The delta of an OTM option is a rough guide to the model chance of finishing in the money: a 0.16 delta call has a model probability of roughly 16%. A high win rate with a small average win and an occasional large loss is the typical profile of this strategy. The real risks are a gap, an event day or a volatility spike that lifts the option price before it reaches the strike. Compare the strike distance with the expected move; selling inside the expected move pays more but is breached more often.`,
+      eg: { title: 'Short 24,500 CE at ₹38 (illustrative)', text: `Premium = 38 × 65 = ₹2,470; breakeven 24,538, which is 538 points or 2.24% above 24,000. The 7-day expected move at VIX 14 is about 465 points, so the strike is outside one sigma. If NIFTY expires at 24,700 the loss is (200 − 38) × 65 = ₹10,530, which equals more than four times the premium.` },
+      tip: `A strike that is rarely hit is not a safe strike. Judge the trade by its worst plausible loss, not by its win rate.`,
+      visual: { kind: 'ladder', title: 'OTM calls above 24,000 (the seller keeps the premium if they stay OTM)', optType: 'CE', spot: 24000, strikes: [24000, 24200, 24300, 24500, 24700] },
+      calc: { id: 'expected-move', preset: { spot: 24000, vix: 14, days: 7 }, why: 'Gives the 1-sigma range of about 465 points to compare with strike distance.' },
+    },
+    {
+      t: 7,
+      def: `Intraday premium selling means selling options and closing them the same day, usually to collect time decay and quick drops in premium. It avoids overnight gap risk but demands fast execution and exits. It is most active on expiry day when time value disappears quickly.`,
+      hi: `Intraday premium selling matlab option bechna aur usi din band kar dena, taaki time decay aur premium ke tez girne ka fayda mile. Isme overnight gap ka risk nahi hota, par fast execution aur strict exit chahiye. Expiry day par yeh sabse zyada hota hai kyunki time value tezi se khatam hoti hai.`,
+      how: `All index positions are marked to market and margin is monitored intraday. SEBI introduced stricter measures for index derivative expiries in October 2024, including upfront collection of option premium and extra margin on expiry-day short options, so verify the latest rules and your broker's margin before trading. On expiry day gamma is highest, so a 40-point move can double the premium of a short option. Brokerage, STT on the sell side, exchange charges and slippage take a larger share of small intraday profits.`,
+      eg: { title: 'Expiry-day sell of 24,000 CE (illustrative)', text: `At 10:00 the 24,000 CE is ₹60. A trader sells 1 lot and buys back at ₹40 at 14:30: profit = (60 − 40) × 65 = ₹1,300 before charges. If NIFTY instead rallies and the option is bought back at ₹120 the loss is (120 − 60) × 65 = ₹3,900, three times the potential gain. A stop at ₹90 would limit the loss to ₹1,950.` },
+      tip: `Without a pre-set stop, intraday selling is gambling with a small edge. Decide the stop premium before placing the sell order.`,
+      visual: { kind: 'timeline', title: 'An illustrative expiry-day selling plan', events: [{ when: '09:15–09:45', what: 'Watch the opening range, do not sell the first spike', tone: 'neutral' }, { when: '10:00', what: 'Sell the option, place the stop order at once', tone: 'gold' }, { when: '12:00', what: 'Review: has spot moved toward the strike?', tone: 'neutral' }, { when: '14:30', what: 'Book profit or exit; avoid holding to the last half hour', tone: 'ice' }] },
+      calc: { id: 'charges', preset: { premium: 60, lotSize: 65, lots: 1, side: 'sell', brokerage: 20 }, why: 'Shows how charges eat into a ₹1,300 intraday profit.' },
+    },
+    {
+      t: 8,
+      def: `Positional premium selling means holding short options for several days, often on a monthly expiry, to earn the slow decay of time value. It needs more margin and carries overnight and event risk, but avoids the noise of intraday swings. It suits traders with a view that the market will stay in a range.`,
+      hi: `Positional premium selling matlab short options ko kai din tak hold karna, aksar monthly expiry tak, taaki time value ka dheere dheere decay milta rahe. Isme margin zyada lagta hai aur overnight aur event ka risk rehta hai, lekin intraday ke shor se bach jaate ho. Yeh unke liye hai jinhe lagta hai market range mein rahega.`,
+      how: `Time decay is not linear: it is slow when expiry is far and accelerates in the last two weeks. A positional seller therefore often sells the option about 3 to 4 weeks from expiry and exits well before the final days to avoid the highest gamma. The position stays open through overnight gaps, global events and the Union Budget or election days. Margin may rise if volatility rises, so spare capital is essential.` ,
+      eg: { title: 'Sell 24,500 CE with 30 days left (illustrative)', text: `At 30 days the 24,500 CE is about ₹221. Sell 1 lot = ₹14,365 collected. After 10 days with NIFTY unchanged at 24,000 and IV unchanged, the option is worth about ₹147. Buying back gives a profit of (221 − 147) × 65 = ₹4,810. A 400-point gap up in those 10 days would raise it far above 221 and turn the trade into a large loss.` },
+      tip: `Positional sellers should exit or hedge before the last few days. The fastest decay is also where gamma risk is highest.`,
+      visual: { kind: 'curve', title: 'Time value shrinks, slowly then quickly', curve: 'timeValue' },
+      calc: { id: 'greeks', preset: { optType: 'CE', spot: 24000, strike: 24500, days: 30, iv: 14, rate: 6.5 }, why: 'Compare theta at 30 days with the same option at 7 days.' },
+    },
+  ],
+  tools: [{ id: 'option-pnl', preset: { optType: 'CE', side: 'sell', strike: 24300, premium: 80, expiryPrice: 24600, lotSize: 65, lots: 1 }, why: 'Test any short option at different expiry prices.' }],
+}
+export default m

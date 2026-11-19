@@ -1,0 +1,152 @@
+import type { ModuleLesson } from '../topicLessonTypes'
+
+/* Module 23.2 - Mass Market Psychology.
+ * All numbers illustrative: NIFTY about 24,000, lot 65 (check the current NSE contract specification).
+ * Historical reference: 23 March 2020, Nifty fell about 1,110 points and closed below 7,650 (press reports). */
+const m: ModuleLesson = {
+  moduleId: '23.2',
+  intro: `A market price is the net result of many people's hopes and fears meeting in the order book. This module covers what bulls, bears, retail buyers and option writers typically expect, and how crowds behave at the extremes: panic, euphoria and capitulation. Crowd behaviour is a context for your analysis, not a signal that works by itself.`,
+  introHi: `Market ka price bahut saare logon ki umeed aur dar ka milan hota hai jo order book mein milte hain. Is module mein dekhenge ki bulls, bears, retail buyers aur option writers aam taur par kya expect karte hain, aur crowd extremes par kaise behave karti hai: panic, euphoria aur capitulation. Crowd behaviour aapke analysis ke liye context hai, akela signal nahi.`,
+  steps: {
+    concept: `Mass psychology is the shared emotional state of many participants at once. When most people expect the same thing, price tends to move until that expectation is already in the price. Extremes of fear or greed often show up near turning points, but the crowd can stay wrong, or right, longer than expected.`,
+    conceptHi: `Mass psychology matlab bahut saare participants ki ek saath ki emotional state. Jab zyadatar log ek hi cheez expect karte hain, toh price tab tak chalta hai jab tak woh expectation price mein aa nahi jaati. Fear ya greed ke extremes aksar turning points ke paas dikhte hain, lekin crowd jitna aap sochte ho usse zyada der tak galat ya sahi reh sakti hai.`,
+    mechanism: `Three channels turn crowd emotion into price. Orders: panic sellers use market orders and push through bids. Hedging: option writers who are losing must buy back or hedge, which adds to the move. Volatility: demand for protection raises implied volatility and India VIX, which makes options expensive just when everyone wants them. These channels feed on each other, which is why fast moves often overshoot and then reverse.`,
+    example: {
+      title: 'Crowd at both ends (illustrative)',
+      text: `NIFTY at 24,000 with VIX 11 after a quiet climb: retail buys far-OTM calls at ₹5 (cost 5 × 65 = ₹325 per lot). A surprise event drops the index 350 points and VIX rises to 18. The 23,600 put that cost ₹25 now trades at ₹150, so a buyer gains (150 − 25) × 65 = ₹8,125 per lot while writers of that put lose the same amount per lot, minus the premium they collected. The same event turned complacency into panic within a session.`,
+    },
+    chart: {
+      kind: 'gauge',
+      title: 'India VIX as a mood gauge (illustrative zones)',
+      caption: 'VIX shows expected volatility, not direction. Zones are rough guides, not rules.',
+      min: 8,
+      max: 40,
+      value: 14,
+      zones: [
+        { from: 8, to: 12, label: 'Complacent', tone: 'gold' },
+        { from: 12, to: 18, label: 'Normal', tone: 'ice' },
+        { from: 18, to: 25, label: 'Nervous', tone: 'gold' },
+        { from: 25, to: 40, label: 'Fear', tone: 'bear' },
+      ],
+    },
+    optionChain: `The chain shows where the crowd has taken positions: heavy call OI above spot suggests many expect resistance there and heavy put OI below suggests support. Treat these as potential levels only; OI alone cannot show who initiated a trade, and heavy OI is not a guarantee of a hold. Rapid unwinding at a strike, a sharp rise in IV across strikes and widening bid-ask spreads are the visible signs of panic.`,
+    psychology: `Buyers pay a known, limited price for a hope; writers collect a small certain premium for an uncertain risk. The crowd is attracted to what has just worked, so complacency builds in calm markets and panic arrives at speed because sellers rush at the same time. The disciplined reading is to ask who must act next (forced sellers, forced buyers, protective buyers) rather than to guess what the crowd feels.`,
+    scenarios: {
+      bullish: `Rising prices with falling VIX bring optimism, then euphoria. Late retail call buying and thin hedging often show up near mature phases, but the trend can run on. Use trailing exits rather than predicting the top.`,
+      bearish: `Falling prices with a rising VIX bring fear, then panic selling and capitulation. Put premiums become expensive, so buying puts after the fall is costly; a bounce can also hit late put buyers through falling IV.`,
+      sideways: `A range with falling VIX makes writers comfortable and buyers bored. Complacency can set up a sharp move, but there is no certainty about when or in which direction.`,
+    },
+    practice: [
+      {
+        q: `A bull buys the 24,200 CE at ₹70 with NIFTY at 24,000. What is the breakeven at expiry and how far must NIFTY rise, in percent?`,
+        a: `Breakeven = 24,200 + 70 = 24,270. Required rise = 270 / 24,000 = 1.125%. Maximum loss is the premium, 70 × 65 = ₹4,550 per lot.`,
+      },
+      {
+        q: `A writer sells the 24,300 CE at ₹40 and NIFTY expires at 24,420. What is the P&L per lot?`,
+        a: `Intrinsic value at expiry = 24,420 − 24,300 = 120. Writer P&L = (40 − 120) × 65 = −₹5,200. Breakeven is 24,340; beyond that the loss grows point by point with no upper limit on a short call.`,
+      },
+      {
+        q: `A retail buyer pays ₹5 for the 24,400 CE with NIFTY at 24,000 and VIX 14. How many one-day standard deviations away is the breakeven?`,
+        a: `Breakeven = 24,405, a distance of 405 points. One-day 1 SD = 24,000 × 0.14 × √(1/365) ≈ 176. 405 / 176 ≈ 2.3 SD. Cheap options are cheap because the market sees such a move as unlikely, not because they are bargains.`,
+      },
+      {
+        q: `VIX rises from 14 to 20 with NIFTY at 24,000. How does the one-day 1 SD move change?`,
+        a: `At 14: 24,000 × 0.14 × 0.05234 ≈ 176 points. At 20: 24,000 × 0.20 × 0.05234 ≈ 251 points. The market is pricing about 43% more daily movement, which is how fear shows up in option prices.`,
+      },
+    ],
+    assignment: `For three trading days, note India VIX at open and close, NIFTY's move, and one sentence on the mood you observe in news headlines. At the end write whether VIX and price moved in opposite directions each day, and what that says about the crowd.`,
+  },
+  topics: [
+    {
+      t: 1,
+      def: `Bulls are market participants who expect prices to rise. They may buy calls, sell puts, buy futures or buy stocks, and they usually look for dips to enter.`,
+      hi: `Bulls woh participants hain jinhe lagta hai price upar jayega. Woh call buy kar sakte hain, put sell kar sakte hain, futures ya stock buy kar sakte hain, aur aam taur par dip par entry dhundhte hain.`,
+      how: `A bullish expectation can be expressed with limited risk (buying a call) or with margin-backed risk (selling a put or buying futures). Each choice has a different breakeven and different risk. Bulls become dominant when good news is expected, but when everyone is already bullish there may be few buyers left, so price can stall. Positioning data such as OI is context only and does not tell you who initiated trades.`,
+      eg: { title: 'Bull buys a call', text: `NIFTY is at 24,000. A bull buys the 24,200 CE at ₹70 and pays 70 × 65 = ₹4,550 for one lot. Breakeven is 24,270, so the index must rise 270 points (1.125%) by expiry for the trade to break even. If NIFTY closes at 24,400, the profit is (200 − 70) × 65 = ₹8,450.` },
+      tip: `Being bullish is not enough for a long call; you also need enough move before expiry to pay for the premium.`,
+      calc: { id: 'breakeven', preset: { optType: 'CE', side: 'buy', strike: 24200, premium: 70 }, why: `Shows how far the market must go for a bull to profit.` },
+    },
+    {
+      t: 2,
+      def: `Bears expect prices to fall. They buy puts, sell calls, short futures or hedge long portfolios, and they usually sell rallies.`,
+      hi: `Bears ko lagta hai price neeche jayega. Woh put buy karte hain, call sell karte hain, futures short karte hain ya apna portfolio hedge karte hain, aur aam taur par rally par sell karte hain.`,
+      how: `Not every put buyer is a bear: many are investors buying protection for a portfolio, so a rise in put volume does not always mean a bearish view. Falls are usually faster than rises, which raises implied volatility and makes puts expensive. Bears face cost too: a put buyer pays theta each day while waiting for the fall.`,
+      eg: { title: 'Bear buys a put', text: `NIFTY at 24,000. A bear buys the 23,800 PE at ₹65, costing 65 × 65 = ₹4,225. Breakeven is 23,800 − 65 = 23,735, a fall of 265 points (about 1.10%). If NIFTY closes at 23,500 at expiry the profit is (300 − 65) × 65 = ₹15,275.` },
+      tip: `A put buyer may be a hedger rather than a bear, so read volume and OI as context, not as a verdict.`,
+      visual: { kind: 'payoff', title: 'Long 23,800 PE at ₹65', caption: 'Loss limited to the premium; profit grows as the index falls.', spot: 24000, legs: [{ type: 'PE', side: 1, strike: 23800, premium: 65 }] },
+    },
+    {
+      t: 3,
+      def: `The retail crowd means individual, small-capital traders. In index options they are often net buyers of short-dated, cheap out-of-the-money options.`,
+      hi: `Retail crowd ka matlab chhote individual traders. Index options mein yeh aksar short-dated aur sasti out-of-the-money options ke net buyers hote hain.`,
+      how: `Cheap premium looks attractive because the loss seems small, but the chance of finishing in the money is low and decay is fast. SEBI's FY25 study found that over 91% of individual traders in equity derivatives had net losses after costs, with an aggregate net loss of about ₹1,05,603 crore, up from about ₹74,812 crore in FY24. Retail activity is also dominated by weekly index options, where costs and spreads eat small edges. The numbers describe a group, not you, but they warn about habits.`,
+      eg: { title: 'The lottery-ticket premium', text: `NIFTY at 24,000, VIX 14, one day to expiry. The 24,400 CE trades at ₹5, costing 5 × 65 = ₹325. Breakeven is 24,405, a 405-point (1.69%) rise in a day, about 2.3 standard deviations. It can pay many times the cost, but most such tickets expire worthless.` },
+      tip: `A cheap premium is not a cheap trade; judge the odds and the cost per rupee of expected move.`,
+      visual: { kind: 'bars', title: 'SEBI study: aggregate net loss of individual F&O traders (₹ crore)', caption: 'Source: SEBI study on individual traders in equity derivatives, published July 2025 (after costs).', unit: ' cr', items: [{ label: 'FY24', value: 74812, tone: 'gold' }, { label: 'FY25', value: 105603, tone: 'bear' }] },
+    },
+    {
+      t: 4,
+      def: `Writer psychology is the mindset of those who sell options: they collect premium now and accept the risk that the market moves against them. Many writers like probability and time decay but can be hurt by one sharp move.`,
+      hi: `Writer psychology un logon ka mindset hai jo options sell karte hain. Woh abhi premium collect karte hain aur risk lete hain ki market unke khilaf jayega. Kai writers ko probability aur time decay pasand hai, lekin ek tez move unhe nuksan de sakta hai.`,
+      how: `Writers must keep margin (SPAN plus exposure) with the broker, and margin rises when volatility or the index moves against them. A short option has capped profit (the premium) and large, sometimes unlimited, loss. Writers do not always win: a gap move or volatility spike can wipe out many small premiums. They often hedge with a further OTM option, which caps the loss but costs part of the premium.`,
+      eg: { title: 'Writer at 24,300 CE', text: `A writer sells the 24,300 CE at ₹40 and collects 40 × 65 = ₹2,600. Breakeven is 24,340. If NIFTY expires at 24,420 the loss is (120 − 40) × 65 = ₹5,200, which is twice the maximum possible gain. A writer who buys a 24,500 CE at ₹10 as a hedge caps the loss at (200 − 30) × 65 = ₹11,050 at most, though this is more than the unhedged loss only when index exceeds that level.` },
+      tip: `Writing earns small amounts often and can lose big amounts rarely, so risk control matters more than the win rate.`,
+      visual: { kind: 'payoff', title: 'Short 24,300 CE at ₹40', caption: 'Capped gain, uncapped loss above the breakeven.', spot: 24000, legs: [{ type: 'CE', side: -1, strike: 24300, premium: 40 }] },
+    },
+    {
+      t: 5,
+      def: `Buyer psychology is the mindset of those who pay premium for an option. They like limited risk and large possible gains, but must be right about direction, size and timing.`,
+      hi: `Buyer psychology un logon ka mindset hai jo premium dekar option kharidte hain. Unhe limited risk aur bade possible gain pasand aate hain, lekin direction, size aur timing teeno sahi hone chahiye.`,
+      how: `Because the maximum loss is the premium, buyers feel safe and tend to trade often and in large lots. But time decay works against them every day, so even a correct view can lose if the move is slow. Buyers also tend to hold losers to expiry hoping for a late rescue, which is loss aversion at work. A defined exit plan matters as much as the entry.`,
+      eg: { title: 'Right view, still a loss', text: `A buyer pays ₹100 for the 24,100 CE (cost 100 × 65 = ₹6,500) expecting a rise. NIFTY does rise slowly from 24,000 to 24,090 by expiry. The option expires at ₹0, so the loss is the full ₹6,500 although the index rose and his direction was right.` },
+      tip: `A buyer needs direction, magnitude and timing; being right on one of three is often not enough.`,
+      calc: { id: 'option-pnl', preset: { optType: 'CE', side: 'buy', strike: 24100, premium: 100, expiryPrice: 24090, lotSize: 65, lots: 1 }, why: `Shows a loss even when the index rises.` },
+    },
+    {
+      t: 6,
+      def: `Panic selling is a rush to sell at any price because fear takes over. It often comes with a sudden fall, stop-loss triggers and a jump in India VIX.`,
+      hi: `Panic selling matlab dar ke maare kisi bhi price par bechne ki daud. Yeh aksar achanak girawat, stop-loss triggers aur India VIX ke kood ke saath aata hai.`,
+      how: `As the price falls, stop-loss orders turn into market sells, which push price down further and trigger more stops. Margin calls force leveraged holders to sell. On 23 March 2020, during the COVID crash, the Nifty fell about 1,110 points in a day and closed below 7,650, according to press reports. Panic phases create wide spreads and gaps; fills can be far from your stop price.`,
+      eg: { title: 'Stops in a cascade', text: `NIFTY at 24,000 drops to 23,800 in minutes. Many long calls hit stops, and put demand lifts VIX from 14 to 20. A buyer with a stop-loss at ₹60 on a call bought at ₹100 may get filled at ₹52 because of the fast fall, a loss of 48 × 65 = ₹3,120 instead of the planned 40 × 65 = ₹2,600.` },
+      tip: `In a panic your stop price is not your fill price; size trades so a gap through the stop is still survivable.`,
+      visual: { kind: 'candles', title: 'Breakdown with panic', caption: 'Fast fall through support with no pullback.', pattern: 'breakdown', level: { price: 23800, label: 'Stops cluster below' } },
+    },
+    {
+      t: 7,
+      def: `Panic buying is a rush to buy at any price because of fear of missing a rise or because of forced covering of short positions. It often shows up as a sharp, one-way spike.`,
+      hi: `Panic buying matlab kisi bhi price par kharidne ki daud, ya toh upar nikal jaane ke dar se ya short positions cover karne ki majboori se. Yeh aksar ek tez one-way spike ki tarah dikhta hai.`,
+      how: `When prices jump, option writers who are short calls have losses that grow quickly and margin requirements rise, so they buy back, adding to demand. This is short covering. IV can also jump, which raises the premium even further. The move often reverses once the forced buyers are done.`,
+      eg: { title: 'Writer forced to cover', text: `A writer sold the 24,300 CE at ₹40. NIFTY spikes to 24,350 and the call trades at ₹110. Buying back costs (110 − 40) × 65 = ₹4,550 loss per lot. When thousands of writers do the same, the buying itself pushes premium and price higher for a short time.` },
+      tip: `A spike caused by forced covering can fade as quickly as it came; do not mistake it for a fresh trend.`,
+      calc: { id: 'option-pnl', preset: { optType: 'CE', side: 'sell', strike: 24300, premium: 40, expiryPrice: 24350, lotSize: 65, lots: 1 }, why: `Shows how a short call loses as the index rises.` },
+    },
+    {
+      t: 8,
+      def: `Herd mentality is copying what the majority does without checking the reasons. In markets it appears as everyone crowding into the same strike, stock or story.`,
+      hi: `Herd mentality ka matlab bina soche samjhe bheed ko copy karna. Market mein yeh tab dikhta hai jab sab ek hi strike, stock ya story mein ghus jaate hain.`,
+      how: `Following the crowd feels safe because if you are wrong, everyone is wrong. In options, crowds crowd into popular strikes and expiries, which makes those strikes liquid but also sensitive to a single move. Herding amplifies trends in both directions. It is useful to know where the crowd stands, but a good entry rarely comes from joining it at the last moment.`,
+      eg: { title: 'Everyone at one strike', text: `On expiry morning most volume sits in the 24,100 to 24,200 calls because a news channel called a breakout. The 24,150 CE rises from ₹20 to ₹45 in half an hour. A late buyer pays ₹45 and the index then reverses 40 points; the call falls to ₹22, a loss of 23 × 65 = ₹1,495 per lot.` },
+      tip: `Check why the crowd is there and whether you are early or late, not only that it is there.`,
+      visual: { kind: 'oi', title: 'Crowded strikes (illustrative OI, lakh)', caption: 'Positions pile up in a few strikes; these are potential levels only.', spot: 24000, rows: [{ strike: 23900, ce: 40, pe: 90 }, { strike: 24000, ce: 85, pe: 80 }, { strike: 24100, ce: 120, pe: 45 }, { strike: 24200, ce: 150, pe: 20 }] },
+    },
+    {
+      t: 9,
+      def: `Euphoria is an extreme of optimism where people believe prices can only rise. It tends to appear after a long rise and shows in risk-taking, leverage and low hedging.`,
+      hi: `Euphoria optimism ka extreme hai jahan logon ko lagta hai price sirf upar hi jayega. Yeh lambi rally ke baad dikhta hai aur risk-taking, leverage aur kam hedging mein nazar aata hai.`,
+      how: `Signs can include very low India VIX, far-OTM call buying, heavy margin use and everyone talking about the market. These signs are context, not a timing tool: markets can stay euphoric for months. Low VIX makes options cheap, so buying protection is inexpensive in such phases, which is why risk managers think about it then.`,
+      eg: { title: 'Calm and cheap', text: `VIX at 11 and NIFTY near highs. A one-month 23,500 PE costs ₹90, or 90 × 65 = ₹5,850. If a shock lifts the index down 600 points the put is worth at least 100 intrinsic at expiry, a gain of (500 − 90) × 65 = ₹26,650 if NIFTY ends at 23,000. In calm phases protection is cheaper but is also often ignored.` },
+      tip: `Low VIX and a crowd of bulls is a reason to check your risk, not a signal to short.`,
+      visual: { kind: 'gauge', title: 'VIX in a complacent market (illustrative)', caption: 'A low VIX shows low expected volatility, not direction.', min: 8, max: 40, value: 11, zones: [{ from: 8, to: 12, label: 'Complacent', tone: 'gold' }, { from: 12, to: 18, label: 'Normal', tone: 'ice' }, { from: 18, to: 25, label: 'Nervous', tone: 'gold' }, { from: 25, to: 40, label: 'Fear', tone: 'bear' }] },
+    },
+    {
+      t: 10,
+      def: `Capitulation is the point where many holders give up and sell at the same time, accepting heavy losses. It is usually marked by very high volume, a sharp fall and a spike in India VIX.`,
+      hi: `Capitulation woh point hai jahan bahut saare holders ek saath haar maan kar bech dete hain aur bhaari loss accept karte hain. Isme aksar bahut zyada volume, tez girawat aur India VIX mein spike dikhta hai.`,
+      how: `After capitulation, sellers have mostly sold, so selling pressure can fade and the market may bounce, but it is only visible in hindsight. During the March 2020 crash, India VIX rose above 70 on 23 March (press reports) while the Nifty closed near the lows of that phase, and a strong recovery followed over the next months. Not every sharp fall is a capitulation, and catching the bottom is mostly luck.`,
+      eg: { title: 'Fear priced in', text: `With VIX at 70 versus a normal 14, a one-day 1 SD move on spot 8,000 would be 8,000 × 0.70 × √(1/365) ≈ 293 points, versus about 59 points at VIX 14. Options were extremely expensive, so buying puts after the fall was costly and sellers of those options had very large margin needs.` },
+      tip: `A volatility spike can mark panic, but premium is also most expensive then; do not buy it blindly at the extreme.`,
+      calc: { id: 'expected-move', preset: { spot: 8000, vix: 70, days: 1 }, why: `Shows how large the market-implied daily move is at panic-level VIX.` },
+    },
+  ],
+}
+export default m

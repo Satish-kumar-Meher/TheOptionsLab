@@ -1,0 +1,113 @@
+import type { ModuleLesson } from '../topicLessonTypes'
+
+/* Module 20.3 — Vertical Spreads.
+ * All numbers illustrative: NIFTY ≈ 24,000, lot 65 (check the current NSE contract specification), India VIX ≈ 14, 7 days to expiry.
+ * Premiums are Black-Scholes values (IV 14%, r 6.5%, q 1.3%) rounded to whole rupees; real premiums differ. */
+const m: ModuleLesson = {
+  moduleId: '20.3',
+  intro: `A vertical spread combines one bought and one sold option of the same type and expiry at two different strikes. The sold option pays for part of the bought one, and both profit and loss become fixed in advance. This module covers the four basic spreads, the debit versus credit split, how their Greeks behave and how to compute maximum profit and loss.`,
+  introHi: `Vertical spread mein ek hi type aur same expiry ke do alag strikes ke options ek saath kharide aur beche jaate hain. Becha hua option kharide hue option ka kuch kharcha nikaal deta hai, aur profit aur loss dono pehle se fixed ho jaate hain. Is module mein chaaron basic spreads, debit vs credit ka fark, unke Greeks aur maximum profit/loss nikaalna cover hota hai.`,
+  steps: {
+    concept: `A vertical spread has two legs: a long option closer to the money and a short option further away, both calls or both puts. You give up some potential profit to cut the cost, or you collect a premium while a bought option caps your loss. Either way, you know the best and worst result before you place the trade.`,
+    conceptHi: `Vertical spread ke do legs hote hain: paise ke paas ek long option aur door ek short option, dono call ya dono put. Aap kuch potential profit chhod dete ho taaki cost kam ho, ya premium collect karte ho aur kharida hua option loss ko cap kar deta hai. Dono tareeke mein trade se pehle best aur worst result pata hota hai.`,
+    mechanism: `Both legs are placed on NSE as one spread order or two orders. Because the risk is defined, exchange margin is far lower than for a naked short option: the margin is roughly the worst-case loss of the combination, and the broker's margin calculator shows the exact figure. The net premium paid or received is the debit or credit. At expiry, index options are cash-settled, so the result is the difference between the two intrinsic values less the net premium, bounded by the strike gap.`,
+    example: {
+      title: 'Bull call spread 24,000 / 24,300 (illustrative)',
+      text: `NIFTY 24,000. Buy the 24,000 CE at ₹198 and sell the 24,300 CE at ₹80. Net debit = 198 − 80 = ₹118, which is 118 × 65 = ₹7,670 per lot. Maximum profit = (300 − 118) × 65 = ₹11,830 at 24,300 or above. Maximum loss = ₹7,670 at 24,000 or below. Breakeven = 24,118. An outright 24,000 call would cost ₹12,870 and carry no cap on profit, but also a larger risk.`,
+    },
+    chart: { kind: 'payoff', title: 'Bull call spread: buy 24,000 CE ₹198, sell 24,300 CE ₹80', caption: 'Both ends of the payoff are flat: the loss is the debit, the gain is the strike gap minus the debit.', spot: 24000, legs: [{ type: 'CE', side: 1, strike: 24000, premium: 198 }, { type: 'CE', side: -1, strike: 24300, premium: 80 }] },
+    optionChain: `On the chain you choose two strikes and read both premiums, bid-ask spreads and volumes. Check that both legs have healthy liquidity: a wide spread on one leg can eat a large share of a spread's small edge. Compare the gap between strikes with the expected move (about 465 points for 7 days at VIX 14). A short strike far inside the expected move is likely to be reached; one beyond it caps profit where the market rarely goes. OI at the short strike is a possible level, not a guarantee.`,
+    psychology: `Spreads attract traders who dislike open-ended risk. The danger is a different one: paying double commissions and slippage on small edges, or closing the winning leg early and leaving the losing leg. Credit spread sellers feel safe because they win often, but one full loss can wipe out several wins. Buyers of debit spreads accept a fixed small loss for a fixed bounded gain and should treat the entire debit as spent on entry.`,
+    scenarios: {
+      bullish: `Spot rises: bull call and bull put spreads gain. A bull call spread reaches maximum profit at the short strike; a bull put spread keeps its full credit once spot stays above the short put.`,
+      bearish: `Spot falls: bear put and bear call spreads gain. The bear put spread reaches maximum profit at the short put; the bear call keeps the credit once spot stays below the short call.`,
+      sideways: `Spot stays flat: credit spreads keep their credit as time passes, debit spreads lose slowly to theta. A debit spread is a bet on movement; a credit spread is a bet on staying put or moving only slightly.`,
+    },
+    practice: [
+      { q: `Bull call spread: buy 24,100 CE at ₹150 and sell 24,400 CE at ₹56 (lot 65). Find debit, maximum profit and breakeven.`, a: `Debit = 150 − 56 = ₹94, so 94 × 65 = ₹6,110 (maximum loss). Maximum profit = (300 − 94) × 65 = 206 × 65 = ₹13,390. Breakeven = 24,100 + 94 = 24,194.` },
+      { q: `Bear call spread: sell 24,200 CE at ₹111 and buy 24,500 CE at ₹38. NIFTY expires at 24,600. What is the result?`, a: `Credit = 111 − 38 = ₹73. Both calls are in the money: the spread is worth 300 (the strike gap), so loss per unit = 300 − 73 = 227. Loss = 227 × 65 = ₹14,755, which is the maximum loss. The loss cannot grow even if NIFTY goes further.` },
+      { q: `Bear put spread: buy 24,000 PE at ₹174 and sell 23,700 PE at ₹66. NIFTY expires at 23,500. What is the profit?`, a: `Debit = 174 − 66 = ₹108. At 23,500 both puts are in the money; the spread is worth the full gap of 300. Profit per unit = 300 − 108 = 192, so 192 × 65 = ₹12,480, which is the maximum.` },
+      { q: `Bull put spread: sell 23,800 PE at ₹94 and buy 23,500 PE at ₹29. NIFTY expires at 23,650. What is the result?`, a: `Credit = 94 − 29 = ₹65. At 23,650 the 23,800 put is worth 150 and the 23,500 put is worthless, so the spread costs 150. Loss per unit = 150 − 65 = 85, so 85 × 65 = ₹5,525. The breakeven is 23,800 − 65 = 23,735.` },
+    ],
+    assignment: `Pick a view for NIFTY on the next weekly expiry. Build the matching vertical spread on the live chain with strikes 200 to 300 points apart. Write the net debit or credit per lot, maximum profit, maximum loss, breakeven and the reward-to-risk ratio. Then compare this against the plain option you would otherwise have bought or sold and say what you gave up.`,
+  },
+  topics: [
+    {
+      t: 1,
+      def: `A bull call spread means buying a call at a lower strike and selling a call at a higher strike of the same expiry. It is a moderately bullish trade: profit is capped at the higher strike but the cost is lower than buying the call alone. The most you can lose is the net premium paid.`,
+      hi: `Bull call spread matlab neeche ke strike ka call kharidna aur upar ke strike ka call bechna, same expiry mein. Yeh moderately bullish trade hai: profit upar ke strike par cap ho jata hai, par cost akele call khareedne se kam hoti hai. Zyada se zyada loss net premium tak hi hota hai.`,
+      how: `The sold call funds part of the bought call, so the debit is smaller, and the breakeven is lower than for an outright long call. The cost of that is the cap: above the short strike, the long call's extra gains are cancelled by the short call's loss. Theta works against the long leg and for the short leg, so the net theta is small. It is a good fit when you expect a rise to a particular level rather than an unlimited move.`,
+      eg: { title: 'Buy 24,000 CE, sell 24,300 CE (illustrative)', text: `Debit = 198 − 80 = ₹118 → ₹7,670 per lot. Maximum profit = (300 − 118) × 65 = ₹11,830. Breakeven = 24,118. If NIFTY expires at 24,200 the spread is worth 200, profit = (200 − 118) × 65 = ₹5,330. At 24,600 the profit is still ₹11,830, no more.` },
+      tip: `Choose the short strike where you actually expect the market to stall. Putting it too close wastes upside; too far cancels the cost saving.`,
+      visual: { kind: 'payoff', title: 'Bull call spread', spot: 24000, legs: [{ type: 'CE', side: 1, strike: 24000, premium: 198 }, { type: 'CE', side: -1, strike: 24300, premium: 80 }] },
+    },
+    {
+      t: 2,
+      def: `A bear put spread means buying a put at a higher strike and selling a put at a lower strike of the same expiry. It is a moderately bearish trade with capped profit and a loss limited to the net premium paid.`,
+      hi: `Bear put spread matlab upar ke strike ka put kharidna aur neeche ke strike ka put bechna, same expiry mein. Yeh moderately bearish trade hai jisme profit cap hota hai aur loss net premium tak limited rehta hai.`,
+      how: `The sold lower-strike put offsets part of the cost. The maximum profit occurs if the index finishes at or below the lower strike. In falling markets, India VIX often rises, which helps the long put but also lifts the short put, so the net effect of volatility is smaller than for an outright put. The spread is cash-settled at expiry for index options.`,
+      eg: { title: 'Buy 24,000 PE, sell 23,700 PE (illustrative)', text: `Debit = 174 − 66 = ₹108 → ₹7,020. Maximum profit = (300 − 108) × 65 = ₹12,480 at 23,700 or below. Breakeven = 24,000 − 108 = 23,892. At 23,800 expiry: spread worth 200, profit = (200 − 108) × 65 = ₹5,980.` },
+      tip: `A bear put spread suits a measured fall. If you expect a crash, the cap will cost you the exact move you predicted.`,
+      visual: { kind: 'payoff', title: 'Bear put spread', spot: 24000, legs: [{ type: 'PE', side: 1, strike: 24000, premium: 174 }, { type: 'PE', side: -1, strike: 23700, premium: 66 }] },
+    },
+    {
+      t: 3,
+      def: `A bull put spread means selling a put at a higher strike and buying a put at a lower strike. You receive a net credit and keep it if the index stays above the higher strike. It is a bullish-to-neutral trade with defined risk.`,
+      hi: `Bull put spread matlab upar ke strike ka put bechna aur neeche ke strike ka put kharidna. Aapko net credit milta hai aur agar index upar wale strike ke upar rahe toh poora credit aapka. Yeh bullish se neutral view ka defined-risk trade hai.`,
+      how: `The bought lower put is the insurance: it turns an unlimited-style put-selling risk into a fixed loss. Margin is much lower than for a naked short put because the maximum loss is known. The trade benefits from time decay and from a fall in implied volatility. The risk is a fast drop below the lower strike, which produces the maximum loss quickly.`,
+      eg: { title: 'Sell 23,800 PE, buy 23,500 PE (illustrative)', text: `Credit = 94 − 29 = ₹65 → ₹4,225. Maximum loss = (300 − 65) × 65 = ₹15,275. Breakeven = 23,800 − 65 = 23,735. Maximum profit ₹4,225 if NIFTY expires above 23,800. The reward is 0.28 of the risk, so the trade needs to win much more often than it loses.` },
+      tip: `The short strike earns the premium, the long strike is your seat belt. Do not remove the long put to save its cost.`,
+      visual: { kind: 'payoff', title: 'Bull put spread (credit)', spot: 24000, legs: [{ type: 'PE', side: -1, strike: 23800, premium: 94 }, { type: 'PE', side: 1, strike: 23500, premium: 29 }] },
+    },
+    {
+      t: 4,
+      def: `A bear call spread means selling a call at a lower strike and buying a call at a higher strike. You receive a net credit and keep it if the index stays below the lower strike. It is a bearish-to-neutral trade with defined risk.`,
+      hi: `Bear call spread matlab neeche ke strike ka call bechna aur upar ke strike ka call kharidna. Net credit milta hai aur agar index neeche wale strike ke neeche rahe toh poora credit aapka. Yeh bearish se neutral view ka defined-risk trade hai.`,
+      how: `It is the call-side mirror of the bull put spread. The bought higher call limits the loss if the index rallies. The seller wins if NIFTY does not rise much, and also benefits from a drop in volatility. A resistance level or heavy call OI at the short strike may support the view, though OI alone does not prove that the level will hold.`,
+      eg: { title: 'Sell 24,200 CE, buy 24,500 CE (illustrative)', text: `Credit = 111 − 38 = ₹73 → ₹4,745. Maximum loss = (300 − 73) × 65 = ₹14,755 at 24,500 or above. Breakeven = 24,200 + 73 = 24,273. Maximum profit ₹4,745 if NIFTY expires at or below 24,200.` },
+      tip: `A bear call spread is a bet that the market will not go up much, not that it will fall. A flat market is enough.`,
+      visual: { kind: 'payoff', title: 'Bear call spread (credit)', spot: 24000, legs: [{ type: 'CE', side: -1, strike: 24200, premium: 111 }, { type: 'CE', side: 1, strike: 24500, premium: 38 }] },
+    },
+    {
+      t: 5,
+      def: `A debit spread is any vertical spread where you pay a net premium: the bought option costs more than the sold one. The bull call spread and bear put spread are the usual debit spreads. You need the price to move in your direction to profit.`,
+      hi: `Debit spread woh vertical spread hai jisme aap net premium dete ho: kharida hua option becheye hue option se mehenga hota hai. Bull call spread aur bear put spread usual debit spreads hain. Profit ke liye price ka aapki direction mein jaana zaroori hai.`,
+      how: `The debit is the maximum loss, and the maximum profit is the strike gap minus the debit. A debit spread is cheaper than an outright option, so it uses less capital and decays more slowly because the short leg offsets part of the theta. It also has less vega exposure: a rise in implied volatility helps less, and a fall in IV hurts less. The compromise is the cap on profit.`,
+      eg: { title: 'Outright call vs debit spread (illustrative)', text: `Outright 24,000 CE costs 198 × 65 = ₹12,870. The 24,000/24,300 bull call spread costs 118 × 65 = ₹7,670, about 40% less (118 / 198 = 0.60). If NIFTY expires at 24,600: outright profit = (600 − 198) × 65 = ₹26,130; spread profit = ₹11,830. If NIFTY expires at 24,100: outright loses (198 − 100) × 65 = ₹6,370 and the spread loses (118 − 100) × 65 = ₹1,170.` },
+      tip: `A debit spread trades some upside for a lower cost and a lower breakeven. Compare the reward-to-risk: here 182 / 118 = 1.54.`,
+      visual: { kind: 'compare', title: 'Outright call vs bull call spread', left: { head: 'Outright 24,000 CE', tone: 'bull', points: ['Cost ₹12,870', 'Breakeven 24,198', 'Profit not capped'] }, right: { head: 'Bull call spread', tone: 'gold', points: ['Cost ₹7,670', 'Breakeven 24,118', 'Profit capped at ₹11,830'] } },
+    },
+    {
+      t: 6,
+      def: `A credit spread is any vertical spread where you receive a net premium: the sold option brings in more than the bought one costs. The bull put spread and bear call spread are credit spreads. They profit if the market does not move against the short strike.`,
+      hi: `Credit spread woh vertical spread hai jisme aapko net premium milta hai: becha hua option kharide hue option se zyada deta hai. Bull put spread aur bear call spread credit spreads hain. Agar market short strike ke khilaf na jaye toh profit hota hai.`,
+      how: `The maximum profit is the credit; the maximum loss is the strike gap minus the credit. Credit spreads are usually structured with a low reward-to-risk ratio and a high chance of profit. The breakeven win rate equals the maximum loss divided by the strike gap. For example, a spread that risks 235 to make 65 needs to win about 78% of the time just to break even before costs. Theta helps and a fall in IV helps, but a single sharp move can take the full loss.`,
+      eg: { title: 'Win-rate arithmetic for the 23,800 / 23,500 put spread (illustrative)', text: `Credit ₹65, strike gap 300, maximum loss 235. Breakeven win rate = 235 / 300 = 78.3%. At exactly 78.3% wins: 0.783 × ₹4,225 − 0.217 × ₹15,275 = ₹3,308 − ₹3,315, about zero. Costs make the true requirement higher. So a trader claiming an 80% win rate on such spreads has almost no margin for error.` },
+      tip: `A high win rate is not the same as a good strategy. Always multiply win rate by win size and loss rate by loss size.`,
+      visual: { kind: 'gauge', title: 'Breakeven win rate for a credit spread', caption: 'Lower reward-to-risk pushes the required win rate up.', min: 0, max: 100, value: 78.3, unit: '%', zones: [{ from: 0, to: 50, label: 'easy', tone: 'bull' }, { from: 50, to: 75, label: 'demanding', tone: 'gold' }, { from: 75, to: 100, label: 'very demanding', tone: 'bear' }] },
+      calc: { id: 'risk-reward', preset: { winRate: 78.3, avgWin: 4225, avgLoss: 15275 }, why: 'Shows expectancy near zero at the breakeven win rate.' },
+    },
+    {
+      t: 7,
+      def: `Spread Greeks are the net delta, gamma, theta and vega of the two legs combined. Because the legs offset each other, a vertical spread has a smaller delta, a much smaller gamma and theta, and a smaller vega than a single option.`,
+      hi: `Spread Greeks matlab dono legs ke delta, gamma, theta aur vega ka combined (net) value. Legs ek dusre ko offset karte hain, isliye vertical spread ka delta, gamma, theta aur vega ek akele option se kaafi chhota hota hai.`,
+      how: `Net Greek = Greek of the long leg minus Greek of the short leg (for a debit spread). A bull call spread has positive delta, slightly positive gamma and slightly positive vega, and small negative theta. A bull put spread has positive delta but positive theta and negative vega: a credit spread earns decay and suffers if volatility rises. Greeks change as spot moves and time passes, so read them again each day rather than treating them as fixed.`,
+      eg: { title: 'Bull call spread 24,000 / 24,300, 7 days, IV 14% (illustrative)', text: `Long 24,000 CE: delta 0.52. Short 24,300 CE: delta 0.28. Net delta = 0.24, so for 65 units about 15.8 rupees per index point. Net theta is about −2.8 per unit, or −184 per lot per day. Net vega is about +2.0 per unit per volatility point. A single 24,000 call would have delta 0.52, theta about −15 and vega about 13, so the spread is much quieter.` },
+      tip: `Spreads dampen the Greeks; they do not remove them. Check net delta and net theta before the trade, not after.`,
+      visual: { kind: 'bars', title: 'Net delta (per unit): long call vs spread', items: [{ label: 'Long 24,000 CE', value: 0.52, tone: 'ice' }, { label: 'Bull call spread', value: 0.24, tone: 'gold' }], unit: '' },
+      calc: { id: 'portfolio-delta', preset: { d1: 0.52, q1: 65, d2: 0.28, q2: -65, d3: 0, q3: 0 }, why: 'Adds the delta of the long and short legs to get the 15.8 rupees per point.' },
+    },
+    {
+      t: 8,
+      def: `Maximum profit and maximum loss of a vertical spread are fixed by the strike gap and the net premium. For debit spreads, maximum loss is the debit and maximum profit is gap minus debit. For credit spreads, maximum profit is the credit and maximum loss is gap minus credit.`,
+      hi: `Vertical spread ka maximum profit aur loss strike gap aur net premium se fix ho jata hai. Debit spread mein maximum loss debit hai aur maximum profit gap minus debit. Credit spread mein maximum profit credit hai aur maximum loss gap minus credit.`,
+      how: `Multiply each per-unit figure by the lot size (65 for NIFTY, check the current specification) and the number of lots. The maximum values are reached only at expiry; before that the spread can be closed at any value in between, and the market price of the spread depends on time and volatility. Exchange margin is close to the worst-case loss for the defined-risk spread, which is why the capital needed is far lower than for the naked leg. Brokerage and taxes apply on each leg.`,
+      eg: { title: 'Four spreads, 300-point gap (illustrative)', text: `Bull call (debit 118): max loss ₹7,670, max profit ₹11,830. Bear put (debit 108): max loss ₹7,020, max profit ₹12,480. Bull put (credit 65): max profit ₹4,225, max loss ₹15,275. Bear call at a 300-point gap with a credit of 73: max profit ₹4,745, max loss ₹14,755. Debit spreads risk less than they can make; credit spreads risk more than they can make.` },
+      tip: `Write the maximum loss in rupees before entering. If you cannot accept that number, reduce the lots, not the discipline.`,
+      visual: { kind: 'bars', title: 'Maximum loss per lot (₹) for the four spreads', items: [{ label: 'Bull call (debit)', value: 7670, tone: 'ice' }, { label: 'Bear put (debit)', value: 7020, tone: 'ice' }, { label: 'Bull put (credit)', value: 15275, tone: 'gold' }, { label: 'Bear call (credit)', value: 14755, tone: 'gold' }] },
+      calc: { id: 'position-size', preset: { capital: 400000, riskPct: 2, entry: 118, stop: 0, lotSize: 65 }, why: 'With ₹4,00,000 and 2% risk the spread with a ₹7,670 maximum loss allows 1 lot.' },
+    },
+  ],
+  tools: [{ id: 'breakeven', preset: { optType: 'CE', side: 'buy', strike: 24000, premium: 118 }, why: 'Quick breakeven of the net debit placed on the long strike.' }],
+}
+export default m

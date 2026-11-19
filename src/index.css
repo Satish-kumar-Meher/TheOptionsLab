@@ -1,0 +1,163 @@
+@import 'tailwindcss';
+
+/* ───────────────────────────── Design tokens ─────────────────────────────
+   Brand: "Strikewick". Dark glass-and-gold trading terminal.
+   Rule: green/red mean MARKET DIRECTION ONLY (bull / bear / profit / loss / CE / PE).
+   Chrome (CTAs, eyebrows, focus, dividers) uses ivory + champagne, never green.   */
+@theme {
+  --color-bg: #070a0d;
+  --color-bg-2: #0b1015;
+  --color-surface: #111820;
+  --color-surface-2: #17202a;
+  --color-fg: #f4f7fa;
+  --color-fg-2: #929da9;
+  --color-fg-3: #66717d;
+  --color-line: rgb(255 255 255 / 0.07);
+  --color-line-strong: rgb(255 255 255 / 0.14);
+
+  --color-bull: #00e58a;
+  --color-bull-deep: #00c878;
+  --color-bull-ink: #003d26;
+  --color-bear: #f04444;
+  --color-bear-deep: #a91626;
+  --color-bear-ink: #4a0a12;
+
+  /* Champagne: from the warm grid reflections in reference image 2. Chrome accent only. */
+  --color-gold: #c9a86a;
+  --color-gold-dim: #8f7a4f;
+  --color-ice: #8fb4d9; /* cool neutral for non-directional data series */
+
+  --font-display: 'Manrope Variable', 'Inter Variable', system-ui, sans-serif;
+  --font-sans: 'Inter Variable', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-glass: inset 0 1px 0 rgb(255 255 255 / 0.06), 0 28px 70px -28px rgb(0 0 0 / 0.75);
+}
+
+@layer base {
+  html {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+  body {
+    min-height: 100dvh;
+    background:
+      radial-gradient(1200px 600px at 78% -10%, rgb(201 168 106 / 0.06), transparent 60%),
+      radial-gradient(900px 500px at 8% 4%, rgb(143 180 217 / 0.04), transparent 60%),
+      var(--color-bg);
+    overflow-x: clip;
+  }
+  html { overflow-x: clip; }
+  /* Grid/flex items default to min-width:auto, so a wide table or chart inside one stretches the whole track past the viewport. */
+  .grid > *, .flex > .min-w-0 { min-width: 0; }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  ::selection { background: rgb(201 168 106 / 0.35); color: #fff; }
+  :focus-visible { outline: 2px solid var(--color-fg); outline-offset: 3px; border-radius: 6px; }
+  /* Scroll containers must be a containing block so absolutely-positioned bars/tooltips inside are clipped, not leaked into page width. */
+  .overflow-x-auto, .overflow-auto, .overflow-y-auto { position: relative; }
+  button, [role='button'], a, summary, label[for], select { cursor: pointer; }
+  button:disabled { cursor: not-allowed; }
+  * { scrollbar-width: thin; scrollbar-color: rgb(255 255 255 / 0.14) transparent; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: rgb(255 255 255 / 0.12); border-radius: 99px; border: 2px solid transparent; background-clip: padding-box; }
+}
+
+@layer components {
+  /* Glass surfaces — use selectively. */
+  .glass {
+    position: relative;
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 0.05), rgb(255 255 255 / 0.012) 40%),
+      rgb(11 16 21 / 0.72);
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-glass);
+    border-radius: var(--radius-xl);
+  }
+  @supports (backdrop-filter: blur(1px)) {
+    .glass { backdrop-filter: blur(18px) saturate(1.25); -webkit-backdrop-filter: blur(18px) saturate(1.25); background-color: rgb(11 16 21 / 0.55); }
+  }
+  .glass-solid {
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.035), transparent 50%), var(--color-surface);
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-glass);
+    border-radius: var(--radius-xl);
+  }
+  /* specular top edge, like polished bevel on the candles */
+  .glass::before, .glass-solid::before {
+    content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.1), transparent 22%);
+    mask: linear-gradient(#000, transparent 30%); -webkit-mask: linear-gradient(#000, transparent 30%);
+    opacity: 0.55;
+  }
+  .glow-bull { box-shadow: var(--shadow-glass), 0 0 0 1px rgb(0 229 138 / 0.18), 0 0 46px -14px rgb(0 229 138 / 0.4); }
+  .glow-bear { box-shadow: var(--shadow-glass), 0 0 0 1px rgb(240 68 68 / 0.2), 0 0 46px -14px rgb(240 68 68 / 0.42); }
+
+  .eyebrow {
+    font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-gold);
+    display: inline-flex; align-items: center; gap: 0.6rem;
+  }
+  .eyebrow::before { content: ''; width: 1.6rem; height: 1px; background: linear-gradient(90deg, transparent, var(--color-gold)); }
+  .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  .hairline { border-color: var(--color-line); }
+  .text-gradient { background: linear-gradient(180deg, #fff 20%, #a9b4bf); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .text-gold-gradient { background: linear-gradient(180deg, #f0dcae, #b8965a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* Market grid backdrop — champagne gridlines fading to the horizon (ref. image 2). */
+  .market-grid {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.9;
+    background-image:
+      linear-gradient(to right, rgb(201 168 106 / 0.075) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(201 168 106 / 0.075) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(ellipse 80% 70% at 60% 40%, #000 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 60% 40%, #000 20%, transparent 75%);
+    animation: grid-drift 28s linear infinite;
+  }
+  @keyframes grid-drift { to { background-position: 72px 72px; } }
+
+  /* Section rhythm */
+  .section { position: relative; padding-block: clamp(4.5rem, 9vw, 9rem); }
+  .container-x { width: min(100% - 2.5rem, 80rem); margin-inline: auto; }
+
+  /* Range input */
+  input[type='range'].slider {
+    -webkit-appearance: none; appearance: none; width: 100%; height: 22px; background: transparent; cursor: pointer;
+  }
+  input[type='range'].slider::-webkit-slider-runnable-track {
+    height: 4px; border-radius: 99px;
+    background: linear-gradient(90deg, var(--color-gold) var(--fill, 50%), rgb(255 255 255 / 0.12) var(--fill, 50%));
+  }
+  input[type='range'].slider::-moz-range-track { height: 4px; border-radius: 99px; background: rgb(255 255 255 / 0.12); }
+  input[type='range'].slider::-moz-range-progress { height: 4px; border-radius: 99px; background: var(--color-gold); }
+  input[type='range'].slider::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none; margin-top: -7px; width: 18px; height: 18px; border-radius: 50%;
+    background: var(--color-fg); border: 3px solid var(--color-bg); box-shadow: 0 0 0 1px var(--color-gold), 0 4px 12px rgb(0 0 0 / 0.6);
+    transition: transform 0.15s var(--ease-out-expo);
+  }
+  input[type='range'].slider::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--color-fg); border: 3px solid var(--color-bg); box-shadow: 0 0 0 1px var(--color-gold); }
+  input[type='range'].slider:hover::-webkit-slider-thumb { transform: scale(1.12); }
+  input[type='range'].slider:focus-visible { outline-offset: 6px; }
+
+  /* KaTeX tuning for dark glass */
+  .katex { color: var(--color-fg); font-size: 1.06em; }
+  .katex-display { margin: 0.6em 0; overflow-x: auto; overflow-y: hidden; padding-block: 0.25em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  .market-grid { animation: none; }
+}
+
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }

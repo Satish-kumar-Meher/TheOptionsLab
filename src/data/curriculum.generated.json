@@ -1,0 +1,2500 @@
+{
+ "levels": [
+  {
+   "level": 1,
+   "part": 1,
+   "partTitle": "Financial Market Foundations",
+   "stage": "beginner",
+   "title": "Understanding the Financial Markets",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "1.1",
+     "title": "Financial Market Fundamentals",
+     "topics": [
+      "What is a financial market?",
+      "What is a stock market?",
+      "Primary market vs secondary market.",
+      "Equity market.",
+      "Derivatives market.",
+      "Commodity market.",
+      "Currency market.",
+      "Cash market vs derivatives market.",
+      "Trading vs investing.",
+      "Speculation vs hedging vs arbitrage."
+     ]
+    },
+    {
+     "id": "1.2",
+     "title": "Indian Stock Market Structure",
+     "topics": [
+      "What is NSE?",
+      "What is BSE?",
+      "What is SEBI?",
+      "What is a stock exchange?",
+      "What is a stockbroker?",
+      "What is a depository?",
+      "NSDL and CDSL.",
+      "Clearing corporations.",
+      "Settlement process.",
+      "Role of exchanges and regulators."
+     ]
+    },
+    {
+     "id": "1.3",
+     "title": "Understanding Indices",
+     "topics": [
+      "What is an index?",
+      "How is an index calculated?",
+      "NIFTY 50.",
+      "BANKNIFTY.",
+      "FINNIFTY.",
+      "SENSEX.",
+      "Sectoral indices.",
+      "Index constituents and weightage.",
+      "Index rebalancing.",
+      "Spot index vs index futures."
+     ]
+    },
+    {
+     "id": "1.4",
+     "title": "Essential Market Terminology",
+     "topics": [
+      "Bullish and bearish.",
+      "Long and short.",
+      "Bid and ask.",
+      "Bid-ask spread.",
+      "LTP (Last Traded Price).",
+      "Volume.",
+      "Liquidity.",
+      "Volatility.",
+      "Gap up and gap down.",
+      "Intraday vs positional trading.",
+      "Market depth.",
+      "Slippage.",
+      "Circuit limits.",
+      "Tick size."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 2,
+   "part": 1,
+   "partTitle": "Financial Market Foundations",
+   "stage": "beginner",
+   "title": "Market Participants and Their Roles",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "2.1",
+     "title": "Types of Market Participants",
+     "topics": [
+      "Retail traders.",
+      "HNI traders.",
+      "Ultra HNI participants.",
+      "Proprietary trading firms.",
+      "Institutional investors.",
+      "FIIs/FPIs.",
+      "DIIs.",
+      "Mutual funds.",
+      "Hedge funds.",
+      "Market makers.",
+      "Arbitrageurs.",
+      "Algorithmic traders."
+     ]
+    },
+    {
+     "id": "2.2",
+     "title": "Understanding Their Objectives",
+     "topics": [
+      "Why retailers buy options.",
+      "Why professional traders sell options.",
+      "Why institutions hedge portfolios.",
+      "Why market makers provide liquidity.",
+      "Why arbitrageurs exploit price differences.",
+      "Why FIIs trade index futures.",
+      "Why institutions use options for portfolio protection.",
+      "How different participants have different time horizons."
+     ]
+    },
+    {
+     "id": "2.3",
+     "title": "Institutional Market Data",
+     "topics": [
+      "FII cash market activity.",
+      "DII cash market activity.",
+      "FII index futures positions.",
+      "FII index options positions.",
+      "Client and proprietary participant positions.",
+      "Participant-wise OI reports.",
+      "FII long-short ratio.",
+      "Understanding NSE participant-wise trading data."
+     ]
+    },
+    {
+     "id": "2.4",
+     "title": "How Institutions Influence Market Movements",
+     "supplement": true,
+     "topics": [
+      "How large institutional orders affect stock prices.",
+      "Institutional accumulation and distribution.",
+      "Block deals and bulk deals.",
+      "Impact cost and market depth.",
+      "How large orders are executed without creating excessive price impact.",
+      "Institutional buying and selling around important support and resistance zones.",
+      "How futures hedging can influence index movements.",
+      "How to distinguish genuine directional activity from hedging and arbitrage."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 3,
+   "part": 2,
+   "partTitle": "Options Fundamentals",
+   "stage": "beginner",
+   "title": "Understanding Derivatives and Options",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "3.1",
+     "title": "Derivatives Fundamentals",
+     "topics": [
+      "What are derivatives?",
+      "Underlying assets.",
+      "Futures contracts.",
+      "Options contracts.",
+      "Futures vs options.",
+      "Forwards vs futures.",
+      "Swaps (overview).",
+      "Hedging, speculation and arbitrage."
+     ]
+    },
+    {
+     "id": "3.2",
+     "title": "Options Fundamentals",
+     "topics": [
+      "What is an option contract?",
+      "Right vs obligation.",
+      "Option buyer.",
+      "Option seller/writer.",
+      "Option premium.",
+      "Expiry date.",
+      "Strike price.",
+      "Lot size.",
+      "Contract value.",
+      "Exercise and settlement.",
+      "European vs American options.",
+      "Index options vs stock options."
+     ]
+    },
+    {
+     "id": "3.3",
+     "title": "Call and Put Options",
+     "topics": [
+      "What is a Call Option (CE)?",
+      "What is a Put Option (PE)?",
+      "Why do CE and PE exist?",
+      "Call buyer.",
+      "Call seller.",
+      "Put buyer.",
+      "Put seller.",
+      "Four possible option-market participants.",
+      "Payoff of each participant.",
+      "Maximum profit and maximum loss."
+     ]
+    },
+    {
+     "id": "3.4",
+     "title": "Four Core Option Positions",
+     "topics": [],
+     "table": {
+      "headers": [
+       "Position",
+       "General outlook",
+       "Maximum loss"
+      ],
+      "rows": [
+       [
+        "Buy CE",
+        "Bullish",
+        "Premium paid"
+       ],
+       [
+        "Sell CE",
+        "Neutral to bearish",
+        "Theoretically unlimited"
+       ],
+       [
+        "Buy PE",
+        "Bearish",
+        "Premium paid"
+       ],
+       [
+        "Sell PE",
+        "Neutral to bullish",
+        "Very large"
+       ]
+      ]
+     },
+     "checklist": {
+      "title": "Understand each position in depth",
+      "items": [
+       "Why does the participant enter?",
+       "What market movement do they expect?",
+       "When do they book profit?",
+       "When do they exit at a loss?",
+       "What happens when the underlying moves against them?",
+       "What happens near expiry?"
+      ]
+     }
+    },
+    {
+     "id": "3.5",
+     "title": "Option Contract Specifications",
+     "topics": [
+      "Lot size.",
+      "Strike intervals.",
+      "Weekly expiry.",
+      "Monthly expiry.",
+      "Expiry calendar.",
+      "Contract introduction and discontinuation.",
+      "ITM/OTM settlement.",
+      "Physical vs cash settlement.",
+      "Exchange contract specifications.",
+      "Brokerage and transaction charges."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 4,
+   "part": 3,
+   "partTitle": "Option Premium and Pricing",
+   "stage": "beginner",
+   "title": "Understanding Option Premium",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "4.1",
+     "title": "Premium Fundamentals",
+     "topics": [
+      "What is premium?",
+      "Why does an option have a price?",
+      "Who pays the premium?",
+      "Who receives the premium?",
+      "Premium quotation.",
+      "Premium multiplied by lot size.",
+      "Premium fluctuations.",
+      "Option price vs underlying price."
+     ]
+    },
+    {
+     "id": "4.2",
+     "title": "Intrinsic Value",
+     "topics": [
+      "What is intrinsic value?",
+      "Intrinsic value of CE.",
+      "Intrinsic value of PE.",
+      "Intrinsic value of ITM options.",
+      "Why OTM options have zero intrinsic value.",
+      "How intrinsic value changes with Nifty movement."
+     ]
+    },
+    {
+     "id": "4.3",
+     "title": "Time Value",
+     "topics": [
+      "What is time value?",
+      "Time to expiry.",
+      "Time value decay.",
+      "Why ATM options generally have high time value.",
+      "Why far OTM options may become worthless.",
+      "Time value near expiry.",
+      "Time value and volatility."
+     ]
+    },
+    {
+     "id": "4.4",
+     "title": "Option Premium Calculation",
+     "topics": [
+      "CE premium calculation.",
+      "PE premium calculation.",
+      "ATM premium.",
+      "ITM premium.",
+      "OTM premium.",
+      "Premium calculation examples.",
+      "Theoretical option pricing vs actual traded premium."
+     ],
+     "intro": "Understand the fundamental relationship:",
+     "formula": "Option Premium = Intrinsic Value + Time Value"
+    },
+    {
+     "id": "4.5",
+     "title": "Factors Affecting Premium",
+     "topics": [
+      "Underlying price.",
+      "Strike price.",
+      "Time to expiry.",
+      "Implied volatility.",
+      "Delta.",
+      "Gamma.",
+      "Theta.",
+      "Vega.",
+      "Interest rates.",
+      "Dividends and carry effects.",
+      "Demand and supply.",
+      "Liquidity and bid-ask spread."
+     ]
+    },
+    {
+     "id": "4.6",
+     "title": "Premium Behaviour",
+     "topics": [
+      "Premium expansion.",
+      "Premium contraction.",
+      "Premium decay.",
+      "Sudden premium spikes.",
+      "IV crush.",
+      "Premium increase despite a sideways market.",
+      "Premium decrease despite a favourable directional move.",
+      "Premium behaviour during expiry."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 5,
+   "part": 4,
+   "partTitle": "Strike Price and Moneyness",
+   "stage": "beginner",
+   "title": "Understanding Strike Prices",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "5.1",
+     "title": "Strike Price Fundamentals",
+     "topics": [
+      "What is a strike price?",
+      "How exchanges list strikes.",
+      "Strike intervals.",
+      "ATM strike identification.",
+      "Strike selection.",
+      "ATM shifting as Nifty moves."
+     ]
+    },
+    {
+     "id": "5.2",
+     "title": "ATM, ITM and OTM",
+     "topics": [
+      "At The Money.",
+      "In The Money.",
+      "Out of The Money.",
+      "Deep ITM.",
+      "Deep OTM.",
+      "CE moneyness.",
+      "PE moneyness.",
+      "How moneyness affects premium."
+     ]
+    },
+    {
+     "id": "5.3",
+     "title": "Strike Selection for Traders",
+     "topics": [
+      "Why buyers choose ATM.",
+      "Why buyers choose OTM.",
+      "Why buyers choose ITM.",
+      "Why writers choose different strikes.",
+      "Strike selection based on Delta.",
+      "Strike selection based on volatility.",
+      "Strike selection based on liquidity.",
+      "Strike selection near expiry."
+     ]
+    },
+    {
+     "id": "5.4",
+     "title": "Strike-Wise Market Behaviour",
+     "topics": [
+      "ATM premium sensitivity.",
+      "ITM premium behaviour.",
+      "OTM premium behaviour.",
+      "Strike migration.",
+      "ATM shifting.",
+      "Nearby strike concentration.",
+      "Far OTM speculative activity."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 6,
+   "part": 5,
+   "partTitle": "Option Greeks and Mathematical Pricing",
+   "stage": "intermediate",
+   "title": "Mastering Option Greeks",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "6.1",
+     "title": "Introduction to Greeks",
+     "topics": [
+      "What are Option Greeks?",
+      "Why are Greeks important?",
+      "How Greeks affect option premiums.",
+      "Greeks for CE and PE.",
+      "Greeks for buyers and sellers.",
+      "Greeks near expiry.",
+      "Greeks during high volatility."
+     ]
+    },
+    {
+     "id": "6.2",
+     "title": "Delta (Δ)",
+     "topics": [
+      "What is Delta?",
+      "Delta of CE.",
+      "Delta of PE.",
+      "Delta range.",
+      "ATM, ITM and OTM Delta.",
+      "Delta as directional sensitivity.",
+      "Delta-based strike selection.",
+      "Portfolio Delta.",
+      "Delta hedging."
+     ]
+    },
+    {
+     "id": "6.3",
+     "title": "Gamma (Γ)",
+     "topics": [
+      "What is Gamma?",
+      "Relationship between Delta and Gamma.",
+      "Why Gamma is highest near ATM.",
+      "Gamma near expiry.",
+      "Gamma risk for option sellers.",
+      "Gamma explosion.",
+      "Positive and negative Gamma.",
+      "Gamma scalping.",
+      "Gamma squeeze.",
+      "Gamma exposure (GEX)."
+     ]
+    },
+    {
+     "id": "6.4",
+     "title": "Theta (Θ)",
+     "topics": [
+      "What is Theta?",
+      "Time decay.",
+      "Daily Theta decay.",
+      "ATM vs OTM Theta.",
+      "Theta near expiry.",
+      "Theta for buyers.",
+      "Theta for sellers.",
+      "Weekend and holiday decay.",
+      "Accelerated time decay."
+     ]
+    },
+    {
+     "id": "6.5",
+     "title": "Vega (ν)",
+     "topics": [
+      "What is Vega?",
+      "IV and Vega relationship.",
+      "Positive Vega.",
+      "Negative Vega.",
+      "ATM vs OTM Vega.",
+      "Vega near expiry.",
+      "Volatility expansion.",
+      "Volatility contraction.",
+      "Vega risk management."
+     ]
+    },
+    {
+     "id": "6.6",
+     "title": "Rho (ρ)",
+     "topics": [
+      "What is Rho?",
+      "Interest-rate sensitivity.",
+      "Rho for CE.",
+      "Rho for PE.",
+      "Practical relevance for index options."
+     ]
+    },
+    {
+     "id": "6.7",
+     "title": "Advanced Greeks",
+     "topics": [
+      "Vanna.",
+      "Volga/Vomma.",
+      "Charm.",
+      "Speed.",
+      "Color.",
+      "Zomma.",
+      "Cross-Greek interactions.",
+      "Second-order and higher-order risks."
+     ]
+    },
+    {
+     "id": "6.8",
+     "title": "Greeks in Practical Trading",
+     "topics": [
+      "Delta + Gamma combination.",
+      "Theta + Vega combination.",
+      "Gamma + Theta trade-off.",
+      "How Greeks change during a breakout.",
+      "How Greeks change during sideways movement.",
+      "How Greeks change during expiry.",
+      "Managing portfolio Greeks.",
+      "Hedging Greeks."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 7,
+   "part": 6,
+   "partTitle": "Open Interest and Position Build-up",
+   "stage": "intermediate",
+   "title": "Complete Understanding of Open Interest",
+   "subtitle": "Core to the writer-flow approach",
+   "modules": [
+    {
+     "id": "7.1",
+     "title": "OI Fundamentals",
+     "topics": [
+      "What is Open Interest?",
+      "How OI is created.",
+      "Buyer and seller relationship.",
+      "Open contracts.",
+      "Closed contracts.",
+      "Outstanding contracts.",
+      "OI vs volume.",
+      "OI vs traded quantity.",
+      "Total OI.",
+      "Change in OI."
+     ]
+    },
+    {
+     "id": "7.2",
+     "title": "How OI Increases and Decreases",
+     "topics": [
+      "New buyer + new seller.",
+      "Existing buyer + new buyer closing seller's position.",
+      "Existing seller + new seller closing buyer's position.",
+      "Both existing participants closing.",
+      "OI addition.",
+      "OI reduction.",
+      "How OI behaves when contracts are transferred between participants."
+     ]
+    },
+    {
+     "id": "7.3",
+     "title": "Four Major Futures Positioning Patterns",
+     "topics": [],
+     "table": {
+      "headers": [
+       "Price",
+       "OI",
+       "Interpretation"
+      ],
+      "rows": [
+       [
+        "Rising",
+        "Rising",
+        "Long build-up"
+       ],
+       [
+        "Falling",
+        "Rising",
+        "Short build-up"
+       ],
+       [
+        "Rising",
+        "Falling",
+        "Short covering"
+       ],
+       [
+        "Falling",
+        "Falling",
+        "Long unwinding"
+       ]
+      ]
+     },
+     "intro": "Understand why this four-way classification is commonly used for futures and why it cannot be applied blindly to option-chain OI."
+    },
+    {
+     "id": "7.4",
+     "title": "Options-Specific Position Analysis",
+     "topics": [
+      "Fresh call writing.",
+      "Fresh put writing.",
+      "Call buying.",
+      "Put buying.",
+      "Call unwinding.",
+      "Put unwinding.",
+      "Call short covering.",
+      "Put short covering.",
+      "Long build-up in CE.",
+      "Long build-up in PE.",
+      "Short build-up in CE.",
+      "Short build-up in PE."
+     ]
+    },
+    {
+     "id": "7.5",
+     "title": "OI Data Interpretation",
+     "topics": [
+      "Total OI.",
+      "OI change.",
+      "Percentage OI change.",
+      "Strike-wise OI.",
+      "Expiry-wise OI.",
+      "Intraday OI changes.",
+      "Cumulative OI changes.",
+      "OI distribution across strikes.",
+      "OI concentration.",
+      "OI divergence."
+     ]
+    },
+    {
+     "id": "7.6",
+     "title": "Important OI Limitations",
+     "topics": [
+      "Why OI alone cannot identify whether the buyer or seller is initiating a trade.",
+      "Why every open contract has both a buyer and seller.",
+      "Why rising OI does not automatically mean writing.",
+      "Why falling OI does not automatically mean sellers are exiting.",
+      "Why OI updates may be delayed.",
+      "Why OI must be combined with price, volume, IV and trade direction.",
+      "Why total OI and OI change must be interpreted together."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 8,
+   "part": 7,
+   "partTitle": "Complete Option Chain Analysis",
+   "stage": "intermediate",
+   "title": "Understanding Every Option Chain Column",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "8.1",
+     "title": "Option Chain Fundamentals",
+     "topics": [
+      "What is an option chain?",
+      "Why option chains are important.",
+      "CE and PE columns.",
+      "Strike price column.",
+      "Expiry selection.",
+      "ATM strike identification.",
+      "Understanding the entire chain.",
+      "Reading multiple expiries."
+     ]
+    },
+    {
+     "id": "8.2",
+     "title": "Every Option Chain Column",
+     "topics": [],
+     "table": {
+      "headers": [
+       "Column",
+       "Meaning"
+      ],
+      "rows": [
+       [
+        "OI",
+        "Open Interest"
+       ],
+       [
+        "Change in OI",
+        "Change in open contracts"
+       ],
+       [
+        "Volume",
+        "Contracts traded"
+       ],
+       [
+        "IV",
+        "Implied Volatility"
+       ],
+       [
+        "LTP",
+        "Last Traded Price"
+       ],
+       [
+        "Net Change",
+        "Premium change"
+       ],
+       [
+        "Bid Price",
+        "Highest available buying price"
+       ],
+       [
+        "Ask Price",
+        "Lowest available selling price"
+       ],
+       [
+        "Bid Quantity",
+        "Available bid quantity"
+       ],
+       [
+        "Ask Quantity",
+        "Available ask quantity"
+       ],
+       [
+        "Strike",
+        "Contract strike price"
+       ],
+       [
+        "PCR",
+        "Put-Call Ratio"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "8.3",
+     "title": "Understanding the Call Side",
+     "topics": [
+      "CE OI.",
+      "CE change in OI.",
+      "CE volume.",
+      "CE LTP.",
+      "CE IV.",
+      "CE bid and ask.",
+      "CE fresh writing.",
+      "CE unwinding.",
+      "CE short covering.",
+      "CE buying."
+     ]
+    },
+    {
+     "id": "8.4",
+     "title": "Understanding the Put Side",
+     "topics": [
+      "PE OI.",
+      "PE change in OI.",
+      "PE volume.",
+      "PE LTP.",
+      "PE IV.",
+      "PE bid and ask.",
+      "PE fresh writing.",
+      "PE unwinding.",
+      "PE short covering.",
+      "PE buying."
+     ]
+    },
+    {
+     "id": "8.5",
+     "title": "OI-Based Support and Resistance",
+     "topics": [
+      "Highest Call OI.",
+      "Highest Put OI.",
+      "Second-highest OI levels.",
+      "Call writing as potential resistance.",
+      "Put writing as potential support.",
+      "Support shifting.",
+      "Resistance shifting.",
+      "Multiple resistance levels.",
+      "Multiple support levels.",
+      "OI walls.",
+      "Weak vs strong support.",
+      "Weak vs strong resistance."
+     ]
+    },
+    {
+     "id": "8.6",
+     "title": "PCR (Put-Call Ratio)",
+     "topics": [
+      "What is PCR?",
+      "OI PCR.",
+      "Volume PCR.",
+      "Strike-wise PCR.",
+      "Overall PCR.",
+      "Bullish interpretation.",
+      "Bearish interpretation.",
+      "Overbought and oversold interpretations.",
+      "PCR limitations.",
+      "PCR divergence."
+     ]
+    },
+    {
+     "id": "8.7",
+     "title": "Advanced Option Chain Reading",
+     "topics": [
+      "OI buildup at multiple strikes.",
+      "Simultaneous CE and PE writing.",
+      "Simultaneous CE and PE unwinding.",
+      "CE writing with PE unwinding.",
+      "PE writing with CE unwinding.",
+      "Strike-wise IV changes.",
+      "OI migration.",
+      "Writer position shifting.",
+      "Identifying potential traps.",
+      "Reading the option chain dynamically."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 9,
+   "part": 8,
+   "partTitle": "VIX and Volatility Analysis",
+   "stage": "intermediate",
+   "title": "India VIX and Market Volatility",
+   "subtitle": "Dedicated core module",
+   "modules": [
+    {
+     "id": "9.1",
+     "title": "Volatility Fundamentals",
+     "topics": [
+      "What is volatility?",
+      "Why does volatility matter?",
+      "Historical volatility.",
+      "Realized volatility.",
+      "Implied volatility.",
+      "Expected volatility.",
+      "Volatility vs direction.",
+      "Volatility vs momentum."
+     ]
+    },
+    {
+     "id": "9.2",
+     "title": "India VIX",
+     "topics": [
+      "What is India VIX?",
+      "Why is it called the fear gauge?",
+      "How India VIX is calculated.",
+      "NSE India VIX methodology.",
+      "India VIX and Nifty 50 relationship.",
+      "VIX values and their interpretations.",
+      "Annualized volatility.",
+      "VIX and expected market range.",
+      "VIX historical data.",
+      "VIX intraday movements."
+     ]
+    },
+    {
+     "id": "9.3",
+     "title": "VIX Movement Analysis",
+     "topics": [
+      "VIX rising.",
+      "VIX falling.",
+      "VIX sideways.",
+      "Sudden VIX spikes.",
+      "VIX cooling after a spike.",
+      "High VIX environments.",
+      "Low VIX environments.",
+      "VIX during market crashes.",
+      "VIX during strong rallies.",
+      "VIX divergence from Nifty."
+     ]
+    },
+    {
+     "id": "9.4",
+     "title": "India VIX vs Individual Option IV",
+     "topics": [
+      "Difference between India VIX and option IV.",
+      "Strike-wise IV.",
+      "Expiry-wise IV.",
+      "IV skew.",
+      "Volatility smile.",
+      "Volatility term structure.",
+      "IV percentile.",
+      "IV rank.",
+      "IV expansion.",
+      "IV contraction.",
+      "IV crush."
+     ]
+    },
+    {
+     "id": "9.5",
+     "title": "VIX and Option Premium",
+     "topics": [
+      "VIX and CE premium.",
+      "VIX and PE premium.",
+      "How rising volatility affects both sides.",
+      "Why premium can increase in sideways markets.",
+      "Why premium can decrease despite a correct directional prediction.",
+      "Vega and VIX.",
+      "IV crush after major events.",
+      "Volatility and option selling.",
+      "Volatility and option buying."
+     ]
+    },
+    {
+     "id": "9.6",
+     "title": "Advanced Volatility Concepts",
+     "topics": [
+      "Volatility risk premium.",
+      "Volatility clustering.",
+      "Volatility regimes.",
+      "Event-driven volatility.",
+      "Expected move calculation.",
+      "Realized vs implied volatility comparison.",
+      "Volatility skew.",
+      "Volatility surface.",
+      "Volatility mean reversion.",
+      "Volatility forecasting limitations."
+     ]
+    },
+    {
+     "id": "9.7",
+     "title": "VIX in Intraday Trading",
+     "topics": [
+      "VIX before market opening.",
+      "VIX during opening volatility.",
+      "VIX during consolidation.",
+      "VIX during breakouts.",
+      "VIX during breakdowns.",
+      "VIX during expiry.",
+      "VIX + OI combination.",
+      "VIX + option premium combination.",
+      "VIX + Greeks combination.",
+      "VIX-based trading filters."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 10,
+   "part": 9,
+   "partTitle": "Price Action and Technical Analysis",
+   "stage": "advanced",
+   "title": "Reading the Underlying Market",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "10.1",
+     "title": "Candlestick Fundamentals",
+     "topics": [
+      "OHLC.",
+      "Bullish candles.",
+      "Bearish candles.",
+      "Candle body and wick.",
+      "Doji.",
+      "Hammer.",
+      "Shooting star.",
+      "Engulfing patterns.",
+      "Inside bar.",
+      "Candlestick psychology."
+     ]
+    },
+    {
+     "id": "10.2",
+     "title": "Market Structure",
+     "topics": [
+      "Higher highs.",
+      "Higher lows.",
+      "Lower highs.",
+      "Lower lows.",
+      "Uptrend.",
+      "Downtrend.",
+      "Sideways market.",
+      "Market structure shift.",
+      "Break of structure.",
+      "Change of character."
+     ]
+    },
+    {
+     "id": "10.3",
+     "title": "Support and Resistance",
+     "topics": [
+      "Horizontal support.",
+      "Horizontal resistance.",
+      "Dynamic support and resistance.",
+      "Previous day high.",
+      "Previous day low.",
+      "Previous close.",
+      "Opening range.",
+      "Psychological levels.",
+      "Round-number levels.",
+      "Multiple timeframe levels."
+     ]
+    },
+    {
+     "id": "10.4",
+     "title": "Breakout and Breakdown",
+     "topics": [
+      "What is a breakout?",
+      "What is a breakdown?",
+      "Genuine breakout.",
+      "False breakout.",
+      "Failed breakdown.",
+      "Breakout retest.",
+      "Volume confirmation.",
+      "OI confirmation.",
+      "Sustained breakout.",
+      "5-minute, 15-minute and 30-minute closing confirmation."
+     ]
+    },
+    {
+     "id": "10.5",
+     "title": "Intraday Market Behaviour",
+     "topics": [
+      "Gap-up opening.",
+      "Gap-down opening.",
+      "Opening range breakout.",
+      "First-hour trading.",
+      "Midday consolidation.",
+      "Trend continuation.",
+      "Reversal.",
+      "Closing-hour movements.",
+      "Expiry-day movement.",
+      "Intraday volatility."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 11,
+   "part": 10,
+   "partTitle": "Volume, Order Flow and Market Microstructure",
+   "stage": "advanced",
+   "title": "Understanding Actual Buying and Selling Pressure",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "11.1",
+     "title": "Volume Analysis",
+     "topics": [
+      "What is trading volume?",
+      "Volume vs OI.",
+      "Volume vs price.",
+      "Volume spikes.",
+      "Volume contraction.",
+      "Average volume.",
+      "Relative volume.",
+      "Volume divergence.",
+      "Volume confirmation.",
+      "Volume climax."
+     ]
+    },
+    {
+     "id": "11.2",
+     "title": "Price + Volume + OI Analysis",
+     "topics": [
+      "Price increase + volume increase.",
+      "Price increase + OI increase.",
+      "Price decrease + volume increase.",
+      "Price decrease + OI increase.",
+      "Price increase + OI decrease.",
+      "Price decrease + OI decrease.",
+      "Combining futures and options OI.",
+      "Identifying potential accumulation.",
+      "Identifying potential distribution.",
+      "Confirming market direction."
+     ]
+    },
+    {
+     "id": "11.3",
+     "title": "Order Book Fundamentals",
+     "topics": [
+      "What is an order book?",
+      "Bid quantity.",
+      "Ask quantity.",
+      "Market orders.",
+      "Limit orders.",
+      "Stop-loss orders.",
+      "Stop-limit orders.",
+      "Iceberg orders.",
+      "Partial fills.",
+      "Order matching mechanism."
+     ]
+    },
+    {
+     "id": "11.4",
+     "title": "Order Flow Analysis",
+     "topics": [
+      "Aggressive buying.",
+      "Aggressive selling.",
+      "Market buy vs market sell.",
+      "Delta volume.",
+      "Cumulative Volume Delta (CVD).",
+      "Bid-ask volume imbalance.",
+      "Absorption.",
+      "Exhaustion.",
+      "Footprint charts.",
+      "Order-flow divergence."
+     ]
+    },
+    {
+     "id": "11.5",
+     "title": "Market Microstructure",
+     "topics": [
+      "How exchanges match orders.",
+      "Liquidity providers.",
+      "Market takers.",
+      "Market-maker spreads.",
+      "Liquidity depth.",
+      "Liquidity vacuum.",
+      "Market impact.",
+      "Slippage.",
+      "Price discovery.",
+      "Auction mechanism."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 12,
+   "part": 11,
+   "partTitle": "Futures and Options Integration",
+   "stage": "advanced",
+   "title": "Futures + Options + Cash Market Analysis",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "12.1",
+     "title": "Futures Fundamentals",
+     "topics": [
+      "What are index futures?",
+      "Futures price.",
+      "Spot vs futures.",
+      "Futures premium and discount.",
+      "Cost of carry.",
+      "Futures expiry.",
+      "Futures volume.",
+      "Futures OI.",
+      "Futures basis.",
+      "Rollover."
+     ]
+    },
+    {
+     "id": "12.2",
+     "title": "Futures OI Analysis",
+     "topics": [
+      "Long build-up.",
+      "Short build-up.",
+      "Short covering.",
+      "Long unwinding.",
+      "Price and OI combinations.",
+      "Futures volume confirmation.",
+      "Intraday futures activity.",
+      "Futures positioning.",
+      "Futures rollover analysis."
+     ]
+    },
+    {
+     "id": "12.3",
+     "title": "Futures and Options Relationship",
+     "topics": [
+      "Futures direction vs CE/PE activity.",
+      "Futures buying with CE unwinding.",
+      "Futures selling with PE unwinding.",
+      "Futures buying with PE writing.",
+      "Futures selling with CE writing.",
+      "Futures and option-chain divergence.",
+      "Spot-futures basis changes.",
+      "Futures and IV relationships.",
+      "Futures and dealer hedging."
+     ]
+    },
+    {
+     "id": "12.4",
+     "title": "Institutional Positioning",
+     "topics": [
+      "FII index futures long positions.",
+      "FII index futures short positions.",
+      "FII options positions.",
+      "Participant-wise OI.",
+      "FII long-short ratio.",
+      "Client positions.",
+      "Proprietary positions.",
+      "Daily position changes.",
+      "Institutional hedging.",
+      "Understanding limitations of published participant data."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 13,
+   "part": 12,
+   "partTitle": "Option Writers and Seller Psychology",
+   "stage": "professional-analysis",
+   "title": "Understanding the Option Writers",
+   "subtitle": "Central to the writer-flow approach",
+   "modules": [
+    {
+     "id": "13.1",
+     "title": "Who Are Option Writers?",
+     "topics": [
+      "Definition of option writing.",
+      "Call writers.",
+      "Put writers.",
+      "Retail option sellers.",
+      "HNI option sellers.",
+      "Institutional option sellers.",
+      "Proprietary traders.",
+      "Market makers.",
+      "Hedged option sellers.",
+      "Unhedged option sellers."
+     ]
+    },
+    {
+     "id": "13.2",
+     "title": "Why Do Writers Sell Options?",
+     "topics": [
+      "Collecting premium.",
+      "Time decay advantage.",
+      "Volatility risk premium.",
+      "Range-bound market expectations.",
+      "Hedging existing positions.",
+      "Yield enhancement.",
+      "Market-making activities.",
+      "Arbitrage strategies.",
+      "Portfolio protection.",
+      "Directional speculation."
+     ]
+    },
+    {
+     "id": "13.3",
+     "title": "Types of Option Writers",
+     "topics": [
+      "Naked CE writers.",
+      "Naked PE writers.",
+      "Covered call writers.",
+      "Cash-secured put writers.",
+      "Hedged option writers.",
+      "Spread sellers.",
+      "Straddle sellers.",
+      "Strangle sellers.",
+      "Iron condor traders.",
+      "Institutional market makers."
+     ]
+    },
+    {
+     "id": "13.4",
+     "title": "Writer Psychology",
+     "topics": [
+      "Why writers defend certain strikes.",
+      "Why writers add positions.",
+      "Why writers shift positions.",
+      "Why writers exit positions.",
+      "Why writers book profits.",
+      "Why writers hedge.",
+      "Why writers reduce exposure before expiry.",
+      "Why writers avoid certain volatility environments.",
+      "How losses influence writer decisions.",
+      "How hedging changes their behaviour."
+     ]
+    },
+    {
+     "id": "13.5",
+     "title": "How Writers Influence Market Movements",
+     "topics": [
+      "Call writing and potential resistance.",
+      "Put writing and potential support.",
+      "Writer concentration.",
+      "Call-writer unwinding.",
+      "Put-writer unwinding.",
+      "Short covering.",
+      "Short squeeze.",
+      "Gamma-related hedging flows.",
+      "Support and resistance migration.",
+      "When writer positioning fails."
+     ]
+    },
+    {
+     "id": "13.6",
+     "title": "Writer Traps",
+     "topics": [
+      "Call writers trapped above resistance.",
+      "Put writers trapped below support.",
+      "Failed breakout.",
+      "Failed breakdown.",
+      "Short squeeze.",
+      "Sudden hedging demand.",
+      "Volatility expansion.",
+      "Liquidity shortage.",
+      "Position adjustment.",
+      "Identifying possible trapped positions."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 14,
+   "part": 13,
+   "partTitle": "Option Buyers and Retail Psychology",
+   "stage": "professional-analysis",
+   "title": "Understanding Option Buyers",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "14.1",
+     "title": "Types of Option Buyers",
+     "topics": [
+      "Retail CE buyers.",
+      "Retail PE buyers.",
+      "Intraday option buyers.",
+      "Positional option buyers.",
+      "Momentum traders.",
+      "Breakout traders.",
+      "Event traders.",
+      "Hedging buyers.",
+      "Speculative buyers.",
+      "Institutional option buyers."
+     ]
+    },
+    {
+     "id": "14.2",
+     "title": "Why Buyers Purchase Options",
+     "topics": [
+      "Directional speculation.",
+      "Leverage.",
+      "Limited premium risk.",
+      "Volatility expansion.",
+      "Breakout anticipation.",
+      "Breakdown anticipation.",
+      "Event-based trades.",
+      "Portfolio protection.",
+      "Gamma exposure.",
+      "Hedging."
+     ]
+    },
+    {
+     "id": "14.3",
+     "title": "Buyer Psychology",
+     "topics": [
+      "Fear of missing out.",
+      "Greed.",
+      "Panic buying.",
+      "Late entries.",
+      "Overtrading.",
+      "Revenge trading.",
+      "Holding losing options.",
+      "Early profit booking.",
+      "Stop-loss avoidance.",
+      "Expiry-day gambling behaviour."
+     ]
+    },
+    {
+     "id": "14.4",
+     "title": "Buyer Profit and Loss Behaviour",
+     "topics": [
+      "Profit booking by scalpers.",
+      "Profit booking by intraday traders.",
+      "Profit booking by positional buyers.",
+      "Partial profit booking.",
+      "Trailing stop-loss.",
+      "Time decay losses.",
+      "IV crush losses.",
+      "Directionally correct but unprofitable trades.",
+      "Gamma-driven profit opportunities.",
+      "Managing winning and losing positions."
+     ]
+    },
+    {
+     "id": "14.5",
+     "title": "Understanding Market Psychology",
+     "topics": [
+      "Bulls vs bears.",
+      "Buyers vs sellers.",
+      "Fear and greed cycles.",
+      "Herd mentality.",
+      "Retail positioning.",
+      "Institutional positioning.",
+      "Crowd behaviour.",
+      "Overconfidence.",
+      "Confirmation bias.",
+      "Contrarian positioning."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 15,
+   "part": 14,
+   "partTitle": "Advanced Option Chain and Intraday Flow",
+   "stage": "professional-analysis",
+   "title": "Dynamic Option Chain Analysis",
+   "subtitle": "Direct application of option-chain reading",
+   "modules": [
+    {
+     "id": "15.1",
+     "title": "Fresh Position Identification",
+     "topics": [
+      "Identifying fresh CE writing.",
+      "Identifying fresh PE writing.",
+      "Identifying fresh CE buying.",
+      "Identifying fresh PE buying.",
+      "Confirming fresh positions using OI and volume.",
+      "Identifying possible position transfers.",
+      "Tracking multiple strikes.",
+      "Tracking ATM activity."
+     ]
+    },
+    {
+     "id": "15.2",
+     "title": "Position Exit Identification",
+     "topics": [
+      "CE unwinding.",
+      "PE unwinding.",
+      "CE short covering.",
+      "PE short covering.",
+      "Long liquidation.",
+      "Profit booking by option buyers.",
+      "Profit booking by option writers.",
+      "Sudden OI reduction.",
+      "Price and OI divergence.",
+      "Exit confirmation."
+     ]
+    },
+    {
+     "id": "15.3",
+     "title": "Strike Migration",
+     "topics": [
+      "Call OI shifting upward.",
+      "Call OI shifting downward.",
+      "Put OI shifting upward.",
+      "Put OI shifting downward.",
+      "Support migration.",
+      "Resistance migration.",
+      "ATM migration.",
+      "OI concentration changes.",
+      "Tracking the strongest nearby strikes.",
+      "Understanding changing market expectations."
+     ]
+    },
+    {
+     "id": "15.4",
+     "title": "Dynamic Support and Resistance",
+     "topics": [
+      "Static OI support.",
+      "Dynamic OI support.",
+      "Static OI resistance.",
+      "Dynamic OI resistance.",
+      "Support strengthening.",
+      "Support weakening.",
+      "Resistance strengthening.",
+      "Resistance weakening.",
+      "Multiple strike confirmation.",
+      "Price acceptance and rejection."
+     ]
+    },
+    {
+     "id": "15.5",
+     "title": "Advanced OI Scenarios",
+     "topics": [
+      "Nifty rises + CE OI decreases.",
+      "Nifty rises + PE OI increases.",
+      "Nifty rises + CE OI increases.",
+      "Nifty falls + PE OI decreases.",
+      "Nifty falls + CE OI increases.",
+      "Nifty falls + PE OI increases.",
+      "Both CE and PE OI increase.",
+      "Both CE and PE OI decrease.",
+      "CE OI decreases while PE OI increases.",
+      "PE OI decreases while CE OI increases."
+     ],
+     "intro": "Study these scenarios individually.",
+     "checklist": {
+      "title": "For every scenario, analyze",
+      "items": [
+       "Price movement.",
+       "OI change.",
+       "Volume.",
+       "Premium movement.",
+       "IV movement.",
+       "Possible participant behaviour.",
+       "Alternative explanations.",
+       "Confirmation and invalidation signals."
+      ]
+     }
+    },
+    {
+     "id": "15.6",
+     "title": "Intraday Option Chain Monitoring",
+     "topics": [
+      "Opening option-chain snapshot.",
+      "Every-minute OI changes.",
+      "Five-minute OI changes.",
+      "Fifteen-minute OI changes.",
+      "Thirty-minute OI changes.",
+      "Cumulative OI changes.",
+      "Comparing current and previous snapshots.",
+      "Tracking top OI strikes.",
+      "Tracking highest OI addition.",
+      "Detecting sudden OI unwinding.",
+      "Detecting changing IV.",
+      "Tracking VIX alongside OI."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 16,
+   "part": 15,
+   "partTitle": "Big Players and Institutional Strategies",
+   "stage": "professional-analysis",
+   "title": "How Professional Participants Operate",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "16.1",
+     "title": "Institutional Trading Behaviour",
+     "topics": [
+      "Institutional order execution.",
+      "Large block orders.",
+      "Algorithmic execution.",
+      "Hedging.",
+      "Portfolio rebalancing.",
+      "Risk reduction.",
+      "Position accumulation.",
+      "Position distribution.",
+      "Liquidity management.",
+      "Institutional derivatives positioning."
+     ]
+    },
+    {
+     "id": "16.2",
+     "title": "Market Makers",
+     "topics": [
+      "Who are market makers?",
+      "Why market makers quote bid and ask.",
+      "Spread management.",
+      "Inventory management.",
+      "Delta hedging.",
+      "Gamma hedging.",
+      "Vega hedging.",
+      "Managing overnight exposure.",
+      "Hedging under changing volatility.",
+      "Market-maker risk."
+     ]
+    },
+    {
+     "id": "16.3",
+     "title": "Dealer and Gamma Exposure",
+     "topics": [
+      "Dealer positioning.",
+      "Long gamma.",
+      "Short gamma.",
+      "Positive Gamma Exposure.",
+      "Negative Gamma Exposure.",
+      "Gamma exposure estimation.",
+      "Gamma flip levels.",
+      "Dealer hedging flows.",
+      "Delta hedging feedback.",
+      "Gamma-related acceleration and stabilisation."
+     ]
+    },
+    {
+     "id": "16.4",
+     "title": "Advanced Institutional Concepts",
+     "topics": [
+      "Delta-neutral trading.",
+      "Gamma scalping.",
+      "Volatility arbitrage.",
+      "Statistical arbitrage.",
+      "Index arbitrage.",
+      "Calendar arbitrage.",
+      "Put-call parity.",
+      "Synthetic futures.",
+      "Risk reversals.",
+      "Dispersion trading."
+     ]
+    },
+    {
+     "id": "16.5",
+     "title": "Liquidity and Institutional Behaviour",
+     "topics": [
+      "Liquidity pools.",
+      "Liquidity sweeps.",
+      "Stop-loss clusters.",
+      "Absorption.",
+      "Aggressive execution.",
+      "Hidden liquidity.",
+      "Order imbalance.",
+      "Failed auctions.",
+      "Trapped participants.",
+      "Distinguishing observable evidence from speculation about manipulation."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 17,
+   "part": 16,
+   "partTitle": "Market Profile and Auction Theory",
+   "stage": "professional-analysis",
+   "title": "Advanced Market Structure",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "17.1",
+     "title": "Auction Market Theory",
+     "topics": [
+      "Market as an auction.",
+      "Price discovery.",
+      "Fair value.",
+      "Acceptance.",
+      "Rejection.",
+      "Balance.",
+      "Imbalance.",
+      "Initiative activity.",
+      "Responsive activity.",
+      "Auction failure."
+     ]
+    },
+    {
+     "id": "17.2",
+     "title": "Market Profile",
+     "topics": [
+      "TPO charts.",
+      "Time Price Opportunity.",
+      "Point of Control (POC).",
+      "Value Area High (VAH).",
+      "Value Area Low (VAL).",
+      "Initial Balance.",
+      "Developing POC.",
+      "Single prints.",
+      "Excess highs and lows.",
+      "Value migration."
+     ]
+    },
+    {
+     "id": "17.3",
+     "title": "Volume Profile",
+     "topics": [
+      "What is Volume Profile?",
+      "Fixed Range Volume Profile.",
+      "Visible Range Volume Profile.",
+      "Session Volume Profile.",
+      "POC.",
+      "High Volume Nodes.",
+      "Low Volume Nodes.",
+      "Value Area.",
+      "Volume gaps.",
+      "Volume profile and support/resistance."
+     ]
+    },
+    {
+     "id": "17.4",
+     "title": "Market Day Types",
+     "topics": [
+      "Normal day.",
+      "Normal variation day.",
+      "Trend day.",
+      "Double distribution day.",
+      "Neutral day.",
+      "Non-trend day.",
+      "Gap-and-go day.",
+      "Gap-fill day.",
+      "Rotational day.",
+      "Identifying the day's developing structure."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 18,
+   "part": 17,
+   "partTitle": "Advanced Liquidity and Price Action",
+   "stage": "professional-analysis",
+   "title": "Advanced Price Behaviour",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "18.1",
+     "title": "Liquidity Concepts",
+     "topics": [
+      "Buy-side liquidity.",
+      "Sell-side liquidity.",
+      "Equal highs.",
+      "Equal lows.",
+      "Liquidity sweep.",
+      "Liquidity grab.",
+      "Stop-loss clusters.",
+      "Liquidity void.",
+      "Liquidity zones.",
+      "Liquidity and market reversals."
+     ]
+    },
+    {
+     "id": "18.2",
+     "title": "Supply and Demand",
+     "topics": [
+      "Supply zones.",
+      "Demand zones.",
+      "Institutional order blocks.",
+      "Breaker blocks.",
+      "Fair Value Gaps.",
+      "Imbalances.",
+      "Mitigation.",
+      "Rejection zones.",
+      "Zone invalidation.",
+      "Combining zones with option-chain evidence."
+     ]
+    },
+    {
+     "id": "18.3",
+     "title": "Trapped Market Participants",
+     "topics": [
+      "Trapped buyers.",
+      "Trapped sellers.",
+      "Bull traps.",
+      "Bear traps.",
+      "Failed breakout participants.",
+      "Failed breakdown participants.",
+      "Late option buyers.",
+      "Trapped option writers.",
+      "Stop-loss cascades.",
+      "Reversal confirmation."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 19,
+   "part": 18,
+   "partTitle": "Expiry Day and Gamma Trading",
+   "stage": "specialist",
+   "title": "Advanced Expiry-Day Trading",
+   "subtitle": "Important for the expiry-day gamma strategy",
+   "modules": [
+    {
+     "id": "19.1",
+     "title": "Expiry Fundamentals",
+     "topics": [
+      "What is expiry?",
+      "Weekly expiry.",
+      "Monthly expiry.",
+      "Expiry settlement.",
+      "Expiry-day premium behaviour.",
+      "ATM and OTM behaviour on expiry.",
+      "Last-hour market behaviour.",
+      "Expiry-related liquidity.",
+      "Expiry-day OI distribution.",
+      "Changes in expiry schedules."
+     ]
+    },
+    {
+     "id": "19.2",
+     "title": "Expiry-Day Greeks",
+     "topics": [
+      "Gamma acceleration.",
+      "Theta acceleration.",
+      "Delta changes.",
+      "Vega sensitivity.",
+      "ATM Gamma.",
+      "OTM Gamma.",
+      "Deep ITM Gamma.",
+      "Gamma risk for sellers.",
+      "Gamma risk for buyers.",
+      "Interaction of Gamma and Theta."
+     ]
+    },
+    {
+     "id": "19.3",
+     "title": "Expiry-Day Market Behaviour",
+     "topics": [
+      "Option pinning.",
+      "Strike pinning.",
+      "Max Pain theory.",
+      "Expiry-day support and resistance.",
+      "Sudden premium spikes.",
+      "Writer unwinding.",
+      "Short covering.",
+      "Expiry-day volatility.",
+      "Expiry-day trend.",
+      "Expiry-day range."
+     ]
+    },
+    {
+     "id": "19.4",
+     "title": "Gamma Trading",
+     "topics": [
+      "What is a Gamma move?",
+      "Gamma expansion.",
+      "Gamma squeeze.",
+      "Long Gamma strategy.",
+      "Short Gamma strategy.",
+      "Gamma scalping.",
+      "ATM vs OTM Gamma.",
+      "Deep OTM premium explosion.",
+      "Delta acceleration.",
+      "Gamma and market-maker hedging."
+     ]
+    },
+    {
+     "id": "19.5",
+     "title": "The Expiry-Day Gamma Approach",
+     "topics": [
+      "Identifying the expiry-day market environment.",
+      "Monitoring Nifty spot and futures.",
+      "Monitoring India VIX.",
+      "Tracking ATM and nearby OTM strikes.",
+      "Tracking CE and PE OI.",
+      "Identifying writer exits.",
+      "Identifying fresh positions.",
+      "Monitoring sudden premium expansion.",
+      "Understanding 2:50 PM–3:15 PM price behaviour.",
+      "Understanding two-sided option buying.",
+      "Understanding trailing stop-loss.",
+      "Understanding why both legs can lose.",
+      "Understanding the impact of theta and IV.",
+      "Managing execution near market close.",
+      "Evaluating the strategy using historical data."
+     ],
+     "intro": "Study this as a dedicated practical case study."
+    },
+    {
+     "id": "19.6",
+     "title": "Expiry-Day Advanced Concepts",
+     "topics": [
+      "Gamma exposure around ATM.",
+      "Dealer positioning.",
+      "Gamma flip.",
+      "Pinning vs trending.",
+      "Max Pain limitations.",
+      "Volatility crush.",
+      "Late-session liquidity.",
+      "Market closing auction.",
+      "Settlement-related risks.",
+      "Expiry-day risk management."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 20,
+   "part": 19,
+   "partTitle": "Option Trading Strategies",
+   "stage": "specialist",
+   "title": "Complete Options Strategy Library",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "20.1",
+     "title": "Basic Option Buying Strategies",
+     "topics": [
+      "Long Call.",
+      "Long Put.",
+      "ATM Call Buying.",
+      "ATM Put Buying.",
+      "OTM Momentum Buying.",
+      "Breakout Option Buying.",
+      "Breakdown Option Buying.",
+      "Intraday Scalping.",
+      "Positional Option Buying.",
+      "Event-Based Option Buying."
+     ]
+    },
+    {
+     "id": "20.2",
+     "title": "Basic Option Selling Strategies",
+     "topics": [
+      "Naked Call Selling.",
+      "Naked Put Selling.",
+      "Covered Call.",
+      "Cash-Secured Put.",
+      "ATM Option Selling.",
+      "OTM Option Selling.",
+      "Intraday Premium Selling.",
+      "Positional Premium Selling."
+     ]
+    },
+    {
+     "id": "20.3",
+     "title": "Vertical Spreads",
+     "topics": [
+      "Bull Call Spread.",
+      "Bear Put Spread.",
+      "Bull Put Spread.",
+      "Bear Call Spread.",
+      "Debit spreads.",
+      "Credit spreads.",
+      "Spread Greeks.",
+      "Maximum profit and loss."
+     ]
+    },
+    {
+     "id": "20.4",
+     "title": "Volatility Strategies",
+     "topics": [
+      "Long Straddle.",
+      "Short Straddle.",
+      "Long Strangle.",
+      "Short Strangle.",
+      "Iron Condor.",
+      "Iron Butterfly.",
+      "Long Butterfly.",
+      "Short Butterfly.",
+      "Calendar Spread.",
+      "Diagonal Spread."
+     ]
+    },
+    {
+     "id": "20.5",
+     "title": "Advanced Strategies",
+     "topics": [
+      "Ratio Spread.",
+      "Backspread.",
+      "Broken Wing Butterfly.",
+      "Jade Lizard.",
+      "Christmas Tree Spread.",
+      "Double Calendar.",
+      "Synthetic Long.",
+      "Synthetic Short.",
+      "Risk Reversal.",
+      "Collar Strategy."
+     ]
+    },
+    {
+     "id": "20.6",
+     "title": "Strategy Selection",
+     "topics": [
+      "Selecting strategies based on market direction.",
+      "Selecting strategies based on India VIX.",
+      "Selecting strategies based on IV.",
+      "Selecting strategies based on expiry.",
+      "Selecting strategies based on Greeks.",
+      "Selecting strategies based on risk-reward.",
+      "Selecting strategies based on market structure.",
+      "Comparing buying vs selling.",
+      "Understanding maximum loss.",
+      "Understanding margin requirements."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 21,
+   "part": 20,
+   "partTitle": "Intraday Trading Playbooks",
+   "stage": "specialist",
+   "title": "Practical Market Scenarios",
+   "subtitle": "Combines everything learned so far",
+   "modules": [
+    {
+     "id": "21.1",
+     "title": "Bullish Setups",
+     "topics": [
+      "Strong put writing.",
+      "Call unwinding.",
+      "Resistance breakout.",
+      "Support holding.",
+      "Higher-high formation.",
+      "Futures long build-up.",
+      "Bullish OI divergence.",
+      "Short-covering rally.",
+      "Strong momentum with rising volume.",
+      "VIX and bullish price confirmation."
+     ]
+    },
+    {
+     "id": "21.2",
+     "title": "Bearish Setups",
+     "topics": [
+      "Strong call writing.",
+      "Put unwinding.",
+      "Support breakdown.",
+      "Resistance rejection.",
+      "Lower-low formation.",
+      "Futures short build-up.",
+      "Bearish OI divergence.",
+      "Long unwinding.",
+      "Strong downside volume.",
+      "VIX and bearish price confirmation."
+     ]
+    },
+    {
+     "id": "21.3",
+     "title": "Sideways Market Setups",
+     "topics": [
+      "Both-side option writing.",
+      "Range-bound Nifty.",
+      "Low IV environment.",
+      "Stable support and resistance.",
+      "Repeated rejection.",
+      "Premium decay.",
+      "Iron Condor opportunities.",
+      "False breakout detection.",
+      "Range expansion signals.",
+      "Identifying a transition from range to trend."
+     ]
+    },
+    {
+     "id": "21.4",
+     "title": "Breakout and Breakdown Setups",
+     "topics": [
+      "Identifying the breakout level.",
+      "Identifying the breakdown level.",
+      "OI concentration before breakout.",
+      "Writer exit confirmation.",
+      "Volume confirmation.",
+      "Futures confirmation.",
+      "VIX confirmation.",
+      "Retest confirmation.",
+      "Failed breakout identification.",
+      "Trade invalidation."
+     ]
+    },
+    {
+     "id": "21.5",
+     "title": "Special Intraday Situations",
+     "topics": [
+      "Gap-up opening.",
+      "Gap-down opening.",
+      "News-driven movement.",
+      "Sudden VIX spike.",
+      "Sudden OI addition.",
+      "Sudden OI reduction.",
+      "Sudden premium expansion.",
+      "Expiry-day trend.",
+      "Last-hour reversal.",
+      "Unexpected volatility."
+     ]
+    },
+    {
+     "id": "21.6",
+     "title": "Full Market Scenario Analysis",
+     "topics": [],
+     "checklist": {
+      "title": "For every setup, answer these questions",
+      "items": [
+       "Who is entering?",
+       "Who is exiting?",
+       "Which side is under pressure?",
+       "Where is the highest OI?",
+       "Where is OI increasing?",
+       "Where is OI decreasing?",
+       "What is the spot price doing?",
+       "What is the futures price doing?",
+       "What is VIX doing?",
+       "What is IV doing?",
+       "Is the breakout genuine?",
+       "What would invalidate the analysis?"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "level": 22,
+   "part": 21,
+   "partTitle": "Risk Management and Capital Management",
+   "stage": "risk",
+   "title": "Professional Risk Management",
+   "subtitle": "Mandatory before live trading",
+   "modules": [
+    {
+     "id": "22.1",
+     "title": "Capital Management",
+     "topics": [
+      "Trading capital.",
+      "Available margin.",
+      "Margin utilisation.",
+      "Capital allocation.",
+      "Position sizing.",
+      "Lot sizing.",
+      "Risk per trade.",
+      "Maximum daily loss.",
+      "Maximum weekly loss.",
+      "Maximum monthly drawdown."
+     ]
+    },
+    {
+     "id": "22.2",
+     "title": "Risk-Reward",
+     "topics": [
+      "Risk-reward ratio.",
+      "Expected return.",
+      "Probability of profit.",
+      "Maximum possible loss.",
+      "Maximum possible profit.",
+      "Breakeven calculation.",
+      "Reward vs probability.",
+      "Risk of ruin.",
+      "Drawdown.",
+      "Recovery factor."
+     ]
+    },
+    {
+     "id": "22.3",
+     "title": "Stop-Loss Management",
+     "topics": [
+      "Fixed stop-loss.",
+      "Percentage-based stop-loss.",
+      "Premium-based stop-loss.",
+      "Underlying-based stop-loss.",
+      "Trailing stop-loss.",
+      "Time-based stop-loss.",
+      "Volatility-based stop-loss.",
+      "Partial exit.",
+      "Slippage during stop-loss.",
+      "Stop-loss execution failure."
+     ]
+    },
+    {
+     "id": "22.4",
+     "title": "Option Seller Risk",
+     "topics": [
+      "Unlimited naked call risk.",
+      "Large put-selling risk.",
+      "Gap risk.",
+      "Gamma risk.",
+      "Vega risk.",
+      "Overnight risk.",
+      "Margin expansion.",
+      "Liquidity risk.",
+      "Expiry settlement risk.",
+      "Hedging."
+     ]
+    },
+    {
+     "id": "22.5",
+     "title": "Option Buyer Risk",
+     "topics": [
+      "Total premium loss.",
+      "Theta decay.",
+      "IV crush.",
+      "Low liquidity.",
+      "Wide bid-ask spread.",
+      "Wrong strike selection.",
+      "Wrong expiry selection.",
+      "Overtrading.",
+      "Averaging losing positions.",
+      "Expiry-day premium collapse."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 23,
+   "part": 22,
+   "partTitle": "Trading Psychology and Mass Psychology",
+   "stage": "risk",
+   "title": "Understanding the Human Side of Trading",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "23.1",
+     "title": "Individual Trading Psychology",
+     "topics": [
+      "Fear.",
+      "Greed.",
+      "FOMO.",
+      "Revenge trading.",
+      "Overconfidence.",
+      "Loss aversion.",
+      "Confirmation bias.",
+      "Recency bias.",
+      "Anchoring bias.",
+      "Emotional discipline."
+     ]
+    },
+    {
+     "id": "23.2",
+     "title": "Mass Market Psychology",
+     "topics": [
+      "Bulls' expectations.",
+      "Bears' expectations.",
+      "Retail crowd behaviour.",
+      "Writer psychology.",
+      "Buyer psychology.",
+      "Panic selling.",
+      "Panic buying.",
+      "Herd mentality.",
+      "Euphoria.",
+      "Capitulation."
+     ]
+    },
+    {
+     "id": "23.3",
+     "title": "Market Participant Behaviour",
+     "topics": [
+      "Who is trapped?",
+      "Who is profitable?",
+      "Who is under pressure?",
+      "Who is adding positions?",
+      "Who is reducing positions?",
+      "Who is hedging?",
+      "Who is booking profits?",
+      "Who is defending a level?",
+      "Who is changing market expectations?",
+      "How participant behaviour changes near expiry."
+     ]
+    },
+    {
+     "id": "23.4",
+     "title": "Developing a Trader's Mindset",
+     "topics": [
+      "Probability-based thinking.",
+      "Thinking in scenarios.",
+      "Accepting losses.",
+      "Avoiding prediction bias.",
+      "Following a trading plan.",
+      "Avoiding revenge trades.",
+      "Consistency.",
+      "Patience.",
+      "Maintaining discipline.",
+      "Process-oriented trading."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 24,
+   "part": 23,
+   "partTitle": "Backtesting, Data Analysis and Algo Trading",
+   "stage": "quant",
+   "title": "Building a Data-Driven Trading System",
+   "subtitle": "Especially useful for building your own option-chain analysis and backtesting engine.",
+   "modules": [
+    {
+     "id": "24.1",
+     "title": "Trading Data Fundamentals",
+     "topics": [
+      "Historical Nifty OHLC.",
+      "Historical futures OHLC.",
+      "Historical option-chain data.",
+      "Historical OI.",
+      "Historical OI change.",
+      "Historical volume.",
+      "Historical IV.",
+      "Historical India VIX.",
+      "Historical Greeks.",
+      "Data frequency: daily, 5-minute, 1-minute and tick-level."
+     ]
+    },
+    {
+     "id": "24.2",
+     "title": "Data Collection",
+     "topics": [
+      "NSE market data.",
+      "Broker APIs.",
+      "DhanHQ APIs.",
+      "Historical options data.",
+      "Historical futures data.",
+      "Option-chain snapshots.",
+      "India VIX data.",
+      "API rate limits.",
+      "Data storage.",
+      "Timestamp synchronisation."
+     ]
+    },
+    {
+     "id": "24.3",
+     "title": "Data Engineering",
+     "topics": [
+      "CSV data processing.",
+      "JSON data processing.",
+      "Data cleaning.",
+      "Missing-data handling.",
+      "Duplicate removal.",
+      "Timestamp alignment.",
+      "Strike-wise data organisation.",
+      "Expiry-wise data organisation.",
+      "Database design.",
+      "Historical snapshot storage."
+     ]
+    },
+    {
+     "id": "24.4",
+     "title": "Backtesting Fundamentals",
+     "topics": [
+      "What is backtesting?",
+      "Strategy rules.",
+      "Entry conditions.",
+      "Exit conditions.",
+      "Stop-loss conditions.",
+      "Profit booking.",
+      "Position sizing.",
+      "Brokerage and charges.",
+      "Slippage.",
+      "Realistic execution simulation."
+     ]
+    },
+    {
+     "id": "24.5",
+     "title": "Strategy Performance Analysis",
+     "topics": [
+      "Win rate.",
+      "Average profit.",
+      "Average loss.",
+      "Profit factor.",
+      "Expectancy.",
+      "Maximum drawdown.",
+      "Sharpe ratio.",
+      "Sortino ratio.",
+      "Risk-reward ratio.",
+      "Consecutive winning and losing trades."
+     ]
+    },
+    {
+     "id": "24.6",
+     "title": "Advanced Backtesting",
+     "topics": [
+      "Walk-forward testing.",
+      "In-sample and out-of-sample testing.",
+      "Overfitting.",
+      "Parameter optimisation.",
+      "Monte Carlo simulation.",
+      "Regime-based testing.",
+      "Expiry-wise performance.",
+      "VIX-based performance.",
+      "Sensitivity analysis.",
+      "Robustness testing."
+     ]
+    },
+    {
+     "id": "24.7",
+     "title": "Algo Trading",
+     "topics": [
+      "Rule-based trading.",
+      "Signal generation.",
+      "Option-chain data processing.",
+      "Real-time OI analysis.",
+      "Real-time Greeks calculation.",
+      "VIX monitoring.",
+      "Trade execution APIs.",
+      "Order management.",
+      "Position monitoring.",
+      "Automated risk controls."
+     ]
+    },
+    {
+     "id": "24.8",
+     "title": "Your Own Intraday Analysis Engine",
+     "topics": [
+      "Nifty spot and futures dashboard.",
+      "Live option-chain dashboard.",
+      "Strike-wise OI tracking.",
+      "OI change tracking.",
+      "CE/PE writer activity detection.",
+      "Support and resistance identification.",
+      "India VIX dashboard.",
+      "IV and Greeks dashboard.",
+      "Breakout and breakdown alerts.",
+      "Historical trade replay.",
+      "Strategy backtesting.",
+      "Performance analytics."
+     ]
+    }
+   ]
+  },
+  {
+   "level": 25,
+   "part": 24,
+   "partTitle": "Trading Journal and Performance Evaluation",
+   "stage": "quant",
+   "title": "Becoming a Consistent Trader",
+   "subtitle": null,
+   "modules": [
+    {
+     "id": "25.1",
+     "title": "Trade Journaling",
+     "topics": [
+      "Recording every trade.",
+      "Entry price.",
+      "Exit price.",
+      "Strike and expiry.",
+      "Entry reason.",
+      "Exit reason.",
+      "OI snapshot.",
+      "VIX snapshot.",
+      "IV and Greeks.",
+      "Screenshot documentation."
+     ]
+    },
+    {
+     "id": "25.2",
+     "title": "Performance Evaluation",
+     "topics": [
+      "Daily P&L.",
+      "Weekly P&L.",
+      "Monthly P&L.",
+      "Win rate.",
+      "Loss rate.",
+      "Profit factor.",
+      "Expectancy.",
+      "Maximum drawdown.",
+      "Average holding time.",
+      "Setup-wise performance."
+     ]
+    },
+    {
+     "id": "25.3",
+     "title": "Mistake Analysis",
+     "topics": [
+      "Late entry.",
+      "Early exit.",
+      "No stop-loss.",
+      "Overtrading.",
+      "Emotional trading.",
+      "Wrong strike selection.",
+      "Ignoring VIX.",
+      "Misreading OI.",
+      "Ignoring liquidity.",
+      "Breaking trading rules."
+     ]
+    },
+    {
+     "id": "25.4",
+     "title": "Continuous Improvement",
+     "topics": [
+      "Identify profitable setups.",
+      "Remove weak setups.",
+      "Review losing trades.",
+      "Improve entry rules.",
+      "Improve exit rules.",
+      "Improve position sizing.",
+      "Analyse market regimes.",
+      "Review weekly performance.",
+      "Monthly strategy evaluation.",
+      "Maintain a documented trading playbook."
+     ]
+    }
+   ]
+  }
+ ],
+ "stages": [
+  {
+   "id": "beginner",
+   "label": "Beginner",
+   "from": 1,
+   "to": 5
+  },
+  {
+   "id": "intermediate",
+   "label": "Intermediate",
+   "from": 6,
+   "to": 9
+  },
+  {
+   "id": "advanced",
+   "label": "Advanced",
+   "from": 10,
+   "to": 12
+  },
+  {
+   "id": "professional-analysis",
+   "label": "Professional Analysis",
+   "from": 13,
+   "to": 18
+  },
+  {
+   "id": "specialist",
+   "label": "Specialist",
+   "from": 19,
+   "to": 21
+  },
+  {
+   "id": "risk",
+   "label": "Risk & Discipline",
+   "from": 22,
+   "to": 23
+  },
+  {
+   "id": "quant",
+   "label": "Quantitative Trading",
+   "from": 24,
+   "to": 25
+  }
+ ]
+}

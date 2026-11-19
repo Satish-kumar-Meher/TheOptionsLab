@@ -1,0 +1,207 @@
+import type { ModuleLesson } from '../topicLessonTypes'
+
+/* Module 11.1 — Volume Analysis.
+ * All numbers illustrative: NIFTY ≈ 24,000, lot 65 (check the current NSE contract specification). */
+const m: ModuleLesson = {
+  moduleId: '11.1',
+  intro: `Volume is the number of contracts or shares that actually changed hands in a period. It tells you how much participation stood behind a price move, which price alone cannot show. For an option trader, volume helps judge whether a breakout, a spike or a quiet drift deserves trust, and whether a strike is liquid enough to trade.`,
+  introHi: `Volume matlab ek period mein kitne contracts ya shares actually trade hue. Yeh batata hai ki price move ke peeche kitni participation thi, jo sirf price se nahi dikhta. Option trader ke liye volume se samajh aata hai ki breakout ya spike par bharosa karna chahiye ya nahi, aur ek strike mein trade karne laayak liquidity hai ya nahi.`,
+  steps: {
+    concept: `Volume counts completed trades. If one trader buys 10 lots and another sells those same 10 lots, the volume is 10 lots, not 20. High volume means many participants agreed on prices in that period; low volume means few did. A price move on heavy volume usually carries more information than the same move on thin volume, but volume never shows direction by itself.`,
+    conceptHi: `Volume completed trades ko count karta hai. Agar ek trader 10 lots buy kare aur doosra wahi 10 lots sell kare, toh volume 10 lots hai, 20 nahi. High volume ka matlab us period mein bahut se participants ne price par agree kiya. Heavy volume par hua move aksar zyada information deta hai, lekin volume akela direction nahi batata.`,
+    mechanism: `Every trade on the NSE order matching system adds its quantity to the contract's volume. Volume is reported per contract (for example one strike and expiry), per instrument (all NIFTY options together) and per candle (1-minute, 5-minute, daily). Because volume follows a daily pattern, with heavy trading near the open and close and a quieter middle, a fair reading compares it with the same time of day on earlier days. Volume is also stated in contracts; multiply by the lot size (65 for NIFTY, check the current NSE contract specification) to get units.`,
+    example: {
+      title: 'Same move, different volume (illustrative)',
+      text: `NIFTY futures normally trade about 3,00,000 contracts a day. On Monday the index rises 0.8% on 4,50,000 contracts, which is 4.5 / 3.0 = 1.5 times average. On Thursday it also rises 0.8% but on 1,80,000 contracts, which is 0.6 times average. Monday had broad participation behind the rise; Thursday's rise happened with few traders involved and is easier to reverse. In units, Monday's volume is 4,50,000 × 65 = 2,92,50,000.`,
+    },
+    chart: {
+      kind: 'bars',
+      title: 'Daily volume vs 20-day average (lakh contracts, illustrative)',
+      caption: 'Bars well above the average show strong participation; bars well below show a quiet market.',
+      unit: ' L',
+      items: [
+        { label: 'Mon', value: 4.5, tone: 'gold' },
+        { label: 'Tue', value: 3.2, tone: 'ice' },
+        { label: 'Wed', value: 2.8, tone: 'ice' },
+        { label: 'Thu', value: 1.8, tone: 'neutral' },
+        { label: 'Fri', value: 3.1, tone: 'ice' },
+        { label: '20-day avg', value: 3.0, tone: 'neutral' },
+      ],
+    },
+    optionChain: `On the option chain, the Volume column per strike shows how many contracts traded today at that strike. A strike with large volume and a tight bid-ask spread is easier to enter and exit. Volume is a flow for the day; open interest (OI) is the stock of positions still open. A strike can have huge volume and little OI change if traders opened and closed positions within the day.`,
+    psychology: `Heavy volume often reflects conviction or panic; thin volume reflects indecision or holiday-style quiet. Beginners fall for the story that high volume means a trend will continue. It may mean the move is exhausted. Read volume together with where price is and what it did before, and avoid acting on a single bar.`,
+    scenarios: {
+      bullish: `Price rises through a recent high with volume clearly above average. More participants supported the move, so it has better odds of holding. A pullback on lighter volume that stays above the broken level supports the idea; heavy volume on the pullback does not.`,
+      bearish: `Price falls through support with rising volume. Selling had participation, so the break is less likely to be a one-bar poke. If price falls on thin volume, the move may simply reflect a lack of buyers and can snap back.`,
+      sideways: `Price drifts inside a range and volume shrinks. Low volume tells you the market is waiting. Option buyers lose to time decay in such phases; a sudden volume expansion often marks the end of the quiet period, though not its direction.`,
+    },
+    practice: [
+      { q: `NIFTY futures average 3,00,000 contracts a day. Today 4,50,000 traded. What is relative volume and the traded units at lot size 65?`, a: `Relative volume = 4,50,000 / 3,00,000 = 1.5. Units = 4,50,000 × 65 = 2,92,50,000.` },
+      { q: `A buys 10 lots from B. Later A sells those 10 lots to C. What is the total volume and the net OI change, if OI was zero before?`, a: `Volume = 10 + 10 = 20 lots. After trade one, OI = 10 lots (new long and new short). In trade two, A closes and C opens; OI stays at 10. Net OI change = +10 lots.` },
+      { q: `Volume over five days (lakh): 3.0, 2.6, 2.1, 1.7, 1.4. By what percentage did volume fall from day 1 to day 5?`, a: `(3.0 − 1.4) / 3.0 = 1.6 / 3.0 = 0.5333, so a fall of 53.3%.` },
+      { q: `Why can a high-volume strike still show a small OI change?`, a: `Because volume counts every trade, including positions opened and closed on the same day. OI counts only positions still open at the end of the day, so intraday round trips add to volume but not to OI.` },
+    ],
+    assignment: `Open the NIFTY futures daily chart for the last 30 sessions. Note the five highest-volume days and write beside each what price did that day and the next. Then do the same for the five lowest-volume days. Write two sentences on what you notice, without drawing any rule yet.`,
+  },
+  topics: [
+    {
+      t: 1,
+      def: `Trading volume is the total quantity of a security or contract that changed hands in a given period, such as a minute or a day. Each trade counts once, no matter how many parties were involved. It is a measure of activity, not of direction.`,
+      hi: `Trading volume ka matlab ek period mein, jaise ek minute ya ek din mein, kitni quantity ke trades hue. Har trade sirf ek baar count hota hai. Yeh activity ka measure hai, direction ka nahi.`,
+      how: `On the NSE, every matched order adds its quantity to the contract's volume. Derivative volume is reported in contracts or lots, and the exchange also publishes traded value (turnover). For index options, the notional turnover (strike × units) is far larger than the premium turnover, so check which one a number refers to. Volume resets every day. Remember it counts both opening and closing trades.`,
+      eg: {
+        title: 'Volume of one option strike (illustrative)',
+        text: `The 24,000 CE trades 6,20,000 contracts during a day. At lot size 65 that is 6,20,000 × 65 = 4,03,00,000 units. If the average traded price was ₹80, premium turnover = 4,03,00,000 × 80 = ₹322.4 crore. The number shows activity at that strike, not whether buyers or sellers were more aggressive.`,
+      },
+      tip: `Always note whether a volume number is in contracts, lots, units or rupees. Mixing them is the commonest source of confusion.`,
+      visual: { kind: 'flow', title: 'How a trade becomes volume', steps: [
+        { label: 'Buy order', note: 'Limit or market', tone: 'ice' },
+        { label: 'Sell order', note: 'Matches on price-time', tone: 'ice' },
+        { label: 'Trade', note: 'Exchange matches', tone: 'gold' },
+        { label: 'Volume', note: 'Quantity counted once', tone: 'neutral' },
+      ] },
+    },
+    {
+      t: 2,
+      def: `Volume is how many contracts traded during the day. Open interest (OI) is how many contracts are still open at the end of the day. Volume can be high while OI hardly changes, and OI changes only when positions are created or closed.`,
+      hi: `Volume matlab din bhar mein kitne contracts trade hue. Open interest (OI) matlab din ke end mein kitne contracts abhi bhi open hain. Volume zyada ho sakta hai aur OI lagbhag same rahe. OI tabhi badalta hai jab positions banti ya band hoti hain.`,
+      how: `If both parties are opening, OI rises by the traded quantity. If both are closing, OI falls. If one is opening and the other closing, OI is unchanged. The NSE clearing corporation (NSCCL) computes OI from the clearing data, which is why OI is published end of day and only estimated through the session by data vendors. Volume answers how much activity; OI answers how much commitment remains.`,
+      eg: {
+        title: 'Two trades, one OI change (illustrative)',
+        text: `Trade 1: A buys 10 lots from B, both new, so volume = 10 and OI = +10 lots. Trade 2: A sells those 10 lots to C, a new buyer. Volume rises to 20, but OI stays at 10 because A closed and C opened. At day end: volume 20 lots, OI change +10 lots = 650 units.`,
+      },
+      tip: `Never read volume as OI. High volume with flat OI means traders churned positions within the day.`,
+      visual: { kind: 'compare', title: 'Volume vs open interest', left: { head: 'Volume', tone: 'gold', points: ['Counts every trade', 'Resets daily', 'Includes intraday round trips'] }, right: { head: 'Open interest', tone: 'ice', points: ['Counts open positions', 'Carries over days', 'Changes only on open or close'] } },
+      calc: { id: 'oi-buildup', preset: { priceChangePct: 0.5, oiChangePct: 3 }, why: 'Pairs a price change with an OI change (use for futures; do not apply blindly to option OI).' },
+    },
+    {
+      t: 3,
+      def: `Volume versus price asks whether a price move was backed by heavy or light participation. Rising price on rising volume suggests wide agreement; rising price on falling volume suggests few participants were driving it. The same logic applies to falls.`,
+      hi: `Volume vs price ka sawaal yeh hai ki price move ke peeche heavy participation thi ya halki. Price upar aur volume bhi upar ho toh zyada log agree kar rahe hain. Price upar lekin volume kam ho toh kam log move chala rahe hain. Girne par bhi yahi logic lagta hai.`,
+      how: `Compare each candle's volume with a short average (for example the last 20 candles). A big candle with above-average volume is a strong bar; a big candle on below-average volume is suspect. Context matters: breakouts, news days and expiry days naturally carry higher volume. On the index, futures volume is the cleaner reference because the index itself is not traded directly.`,
+      eg: {
+        title: 'Two up days (illustrative)',
+        text: `Day A: NIFTY futures rise from 24,000 to 24,192 (+0.8%: 192 / 24,000 = 0.008) on 1.5 times average volume. Day B: the same 0.8% rise on 0.6 times average volume. On day A the rally had more participants; on day B, a small number of orders moved price through thin liquidity, which is more likely to retrace.`,
+      },
+      tip: `Judge the candle against its own context. A strong move on weak volume is a warning, not a signal on its own.`,
+      visual: { kind: 'matrix', title: 'Price move vs volume', xLabels: ['Volume low', 'Volume high'], yLabels: ['Price up', 'Price down'], cells: [
+        { head: 'Weak rise', note: 'Few buyers; may fade', tone: 'neutral' },
+        { head: 'Strong rise', note: 'Broad buying', tone: 'bull' },
+        { head: 'Weak fall', note: 'Few sellers; may bounce', tone: 'neutral' },
+        { head: 'Strong fall', note: 'Broad selling', tone: 'bear' },
+      ] },
+    },
+    {
+      t: 4,
+      def: `A volume spike is a candle or day whose volume is far above normal, often several times the average. It means something unusual drew participants in, such as news, a breakout, an expiry or forced liquidation.`,
+      hi: `Volume spike woh candle ya din hai jiska volume normal se kaafi zyada hota hai, aksar average ka kai guna. Matlab kuch unusual hua jisne participants ko kheencha, jaise news, breakout, expiry ya forced liquidation.`,
+      how: `Define a spike objectively, for example volume above 2 to 3 times the 20-period average. Then ask what caused it. A spike at a support or resistance zone can mark a decision point; a spike at the open or close can simply be the daily pattern. Spikes show that activity was high, not who won. Look at where the candle closed to judge the outcome.`,
+      eg: {
+        title: 'A 5-minute spike (illustrative)',
+        text: `NIFTY futures normally trade 20,000 contracts in a 5-minute candle at 10:15. Today that candle trades 60,000, which is 60,000 / 20,000 = 3 times normal. The candle also closes near its high at 24,085 after pushing above 24,060. A 3x spike with a strong close suggests buyers were aggressive, but the next candles must hold above 24,060 to confirm.`,
+      },
+      tip: `A spike is a question, not an answer. Wait to see where price settles after it.`,
+      visual: { kind: 'bars', title: '5-minute volume with a spike (thousand contracts, illustrative)', unit: 'k', items: [
+        { label: '10:00', value: 18, tone: 'ice' },
+        { label: '10:05', value: 22, tone: 'ice' },
+        { label: '10:10', value: 20, tone: 'ice' },
+        { label: '10:15', value: 60, tone: 'gold' },
+        { label: '10:20', value: 35, tone: 'ice' },
+        { label: '10:25', value: 21, tone: 'ice' },
+      ] },
+    },
+    {
+      t: 5,
+      def: `Volume contraction means volume falls over several sessions or candles. It shows that fewer participants are active, often during consolidation or before a larger move.`,
+      hi: `Volume contraction ka matlab kuch sessions ya candles mein volume gir raha hai. Yeh dikhata hai ki kam participants active hain, jo aksar consolidation mein hota hai ya kisi bade move se pehle.`,
+      how: `Contraction is normal inside a range or a pullback after a trend. If a pullback happens on shrinking volume while price stays above support, traders read it as healthy digestion. Contraction can also precede a breakout, because a quiet range ends when new orders arrive. It does not predict direction. In weekly or monthly index options, shrinking volume also means wider spreads and harder exits.`,
+      eg: {
+        title: 'Five quiet days (illustrative)',
+        text: `Daily futures volume in lakh contracts: 3.0, 2.6, 2.1, 1.7, 1.4. Volume fell by 3.0 − 1.4 = 1.6 lakh, which is 1.6 / 3.0 = 53.3%. Meanwhile NIFTY stayed within 23,950 to 24,100. The market is waiting; a close outside that range on rising volume would end the pause.`,
+      },
+      tip: `Quiet does not mean safe. Contraction often ends abruptly, so keep position size modest in a range.`,
+      visual: { kind: 'bars', title: 'Volume contraction (lakh contracts)', unit: ' L', items: [
+        { label: 'Day 1', value: 3.0, tone: 'ice' },
+        { label: 'Day 2', value: 2.6, tone: 'ice' },
+        { label: 'Day 3', value: 2.1, tone: 'neutral' },
+        { label: 'Day 4', value: 1.7, tone: 'neutral' },
+        { label: 'Day 5', value: 1.4, tone: 'neutral' },
+      ] },
+      calc: { id: 'return-calc', preset: { start: 3.0, end: 1.4, years: 1 }, why: 'Gives the percentage fall in volume from day 1 to day 5 (-53.3%).' },
+    },
+    {
+      t: 6,
+      def: `Average volume is the typical volume over a fixed look-back, such as the last 20 sessions. It is the yardstick against which today's volume is judged.`,
+      hi: `Average volume ek fixed look-back ka typical volume hota hai, jaise pichhle 20 sessions ka. Aaj ka volume isi se compare karke judge karte hain.`,
+      how: `Compute a simple average of daily volume over 10 or 20 sessions. Use the same instrument and compare like with like: futures with futures, weekly options with the same expiry day. Expiry days, Budget days and event days distort the average, so some traders use a median. A shorter window reacts faster; a longer one is steadier.`,
+      eg: {
+        title: 'A five-day average (illustrative)',
+        text: `Volumes in lakh: 2.8, 3.1, 3.4, 2.9, 3.3. Sum = 15.5; average = 15.5 / 5 = 3.1 lakh. A day with 4.65 lakh is 4.65 / 3.1 = 1.5 times average. In units, an average day is 3,10,000 × 65 = 2,01,50,000.`,
+      },
+      tip: `Use the same window every time, otherwise your readings are not comparable.`,
+      visual: { kind: 'bars', title: 'Five days and their average (lakh)', unit: ' L', items: [
+        { label: 'D1', value: 2.8, tone: 'ice' },
+        { label: 'D2', value: 3.1, tone: 'ice' },
+        { label: 'D3', value: 3.4, tone: 'ice' },
+        { label: 'D4', value: 2.9, tone: 'ice' },
+        { label: 'D5', value: 3.3, tone: 'ice' },
+        { label: 'Average', value: 3.1, tone: 'gold' },
+      ] },
+    },
+    {
+      t: 7,
+      def: `Relative volume (RVOL) is today's volume divided by the average volume. A value of 1 means normal, above 1 means busier than usual, below 1 means quieter.`,
+      hi: `Relative volume (RVOL) matlab aaj ka volume divided by average volume. 1 ka matlab normal, 1 se zyada matlab usual se busy, aur 1 se kam matlab usual se shaant.`,
+      how: `RVOL = current volume / average volume. During the day, compare cumulative volume so far with the average volume traded by the same clock time, otherwise early-session numbers look low and late-session numbers look high. Many traders treat 1.5 or more as meaningfully active and below 0.7 as quiet; these are conventions, not rules.`,
+      eg: {
+        title: 'Time-adjusted RVOL (illustrative)',
+        text: `By 11:00 NIFTY futures have traded 1,20,000 contracts. On a typical day 1,00,000 would have traded by 11:00. RVOL = 1.2 / 1.0 = 1.2. Looking only at the full-day average of 3,00,000 would give 1.2 / 3.0 = 0.4, which wrongly says the market is quiet.`,
+      },
+      tip: `Compare with the same time of day. A raw comparison with the full-day average is misleading before the close.`,
+      visual: { kind: 'gauge', title: 'Relative volume', min: 0, max: 3, value: 1.5, unit: 'x', zones: [
+        { from: 0, to: 0.7, label: 'Quiet', tone: 'neutral' },
+        { from: 0.7, to: 1.3, label: 'Normal', tone: 'ice' },
+        { from: 1.3, to: 3, label: 'Active', tone: 'gold' },
+      ] },
+    },
+    {
+      t: 8,
+      def: `Volume divergence is when price and volume send different messages, such as price making a new high on lower volume than the previous high. It suggests the move is attracting fewer participants.`,
+      hi: `Volume divergence tab hota hai jab price aur volume alag-alag signal dein, jaise price naya high bana raha hai lekin volume pichhle high se kam hai. Matlab move mein kam participants hain.`,
+      how: `Compare volume at consecutive swing highs (or lows). If price makes a higher high but the volume at that high is lower, buying interest may be thinning. Divergence is a warning, not a trigger: price can keep rising for a long time. Confirm with a failure of price itself, such as a close back below the prior high, before acting.`,
+      eg: {
+        title: 'Higher high, lower volume (illustrative)',
+        text: `First high: NIFTY 24,100 with 3,60,000 futures contracts that day. Second high: 24,150 with 2,40,000. Volume fell by (3.6 − 2.4) / 3.6 = 33.3%. The index went 50 points higher with a third less participation. A close back below 24,100 would support the warning; a close above 24,150 on rising volume would cancel it.`,
+      },
+      tip: `Divergence needs a price trigger. Trading it before price turns is guessing early.`,
+      visual: { kind: 'candles', title: 'Higher high on weaker participation', caption: 'The second peak is higher but backed by less volume.', pattern: 'distribution', level: { price: 24100, label: 'Prior high 24,100' } },
+    },
+    {
+      t: 9,
+      def: `Volume confirmation means a price move is supported by suitable volume: a breakout on high volume, or a pullback on low volume. Confirmation raises the odds that the move is genuine but does not guarantee it.`,
+      hi: `Volume confirmation ka matlab price move ko suitable volume ka support mil raha hai: breakout par high volume, ya pullback par low volume. Isse move genuine hone ke chances badhte hain, lekin guarantee nahi milti.`,
+      how: `For a breakout above resistance, look for a close beyond the level and volume above the recent average. For a pullback to the broken level, look for lighter volume that holds the level. If price breaks out on weak volume, many traders wait for a retest. Confirmation can still fail, so keep a stop where the idea is wrong.`,
+      eg: {
+        title: 'Breakout with and without confirmation (illustrative)',
+        text: `Resistance is 24,100. Case 1: a 15-minute candle closes at 24,125 with volume 1.8 times average; a trader buys a 24,150 CE at ₹70 with a stop if price closes below 24,090. Case 2: a close at 24,105 on 0.9 times average volume. The first has broad support; the second may be a weak poke. Risk in case 1: 35 index points to the stop, which on an assumed delta of 0.4 is about 14 premium points, ₹910 per lot.`,
+      },
+      tip: `Write your confirmation rule before the trade: the level, the close and the volume multiple. Then you cannot reshape it after the fact.`,
+      visual: { kind: 'candles', title: 'Breakout with volume', pattern: 'breakout', level: { price: 24100, label: 'Resistance 24,100' } },
+    },
+    {
+      t: 10,
+      def: `A volume climax is an extreme volume burst at the end of a long move, when panic buying or selling exhausts itself. It often marks a short-term turning point, but not always.`,
+      hi: `Volume climax ek lambe move ke end mein extreme volume ka burst hota hai, jab panic buying ya selling khatam hone lagti hai. Yeh aksar short-term turning point hota hai, lekin hamesha nahi.`,
+      how: `After a sharp multi-day fall, forced sellers (stop-outs, margin calls) dump positions at once. Volume surges to several times average, and the candle may leave a long lower wick as buyers appear. Once the forced selling is done, there are fewer sellers left, so price can bounce. A climax is only identified afterwards; price can keep falling with high volume for days, as in a real trend.`,
+      eg: {
+        title: 'Selling climax (illustrative)',
+        text: `NIFTY falls from 24,300 to 23,520 over five sessions, a drop of 780 points or 780 / 24,300 = 3.2%. On the last day volume is 4 times average and the candle closes 1% above its low. The next day trades above that candle's high. A trader still needs a stop below the climax low, because a lower low on high volume means the selling is not finished.`,
+      },
+      tip: `Never catch a falling market on volume alone. Wait for price to stop making lower lows.`,
+      visual: { kind: 'candles', title: 'Selling climax and rebound', pattern: 'hammer' },
+      calc: { id: 'return-calc', preset: { start: 24300, end: 23520, years: 1 }, why: 'Computes the 3.2% fall that preceded the climax.' },
+    },
+  ],
+  tools: [{ id: 'oi-buildup', why: 'Price and OI combination for futures.' }],
+}
+export default m
